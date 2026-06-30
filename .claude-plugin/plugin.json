@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "arckit",
+  "version": "5.15.2",
+  "description": "The Enterprise Architecture Governance Harness - 73 slash commands across strategy, architecture, delivery, and assurance",
+  "author": {
+    "name": "TractorJuice",
+    "url": "https://github.com/tractorjuice"
+  },
+  "repository": "https://github.com/tractorjuice/arckit-claude",
+  "license": "MIT",
+  "mcpServers": "./.mcp.json",
+  "experimental": {
+    "monitors": [
+      {
+        "name": "stale-artifact-scan",
+        "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/detect-stale-artifacts.sh",
+        "description": "Detect ArcKit artifacts with overdue reviews or long-unchanged drafts",
+        "when": "always"
+      }
+    ]
+  },
+  "userConfig": {
+    "GOOGLE_API_KEY": {
+      "title": "Google API Key",
+      "description": "Google API key for the google-developer-knowledge MCP server (optional — leave blank to disable)",
+      "type": "string",
+      "sensitive": true
+    },
+    "DATA_COMMONS_API_KEY": {
+      "title": "Data Commons API Key",
+      "description": "Data Commons API key for the datacommons-mcp MCP server (optional — leave blank to disable)",
+      "type": "string",
+      "sensitive": true
+    },
+    "organisation_name": {
+      "title": "Organisation Name",
+      "description": "Organisation name used in generated Document Control headers (e.g. 'Acme Ltd' or 'HM Revenue & Customs')",
+      "type": "string"
+    },
+    "default_classification": {
+      "title": "Default Classification",
+      "description": "Default document classification: PUBLIC, OFFICIAL, OFFICIAL-SENSITIVE, or SECRET",
+      "type": "string"
+    },
+    "governance_framework": {
+      "title": "Governance Framework",
+      "description": "Default governance framework: 'UK Gov' for Service Standard/TCoP/NCSC CAF, 'UAE Federal' for UAE Cabinet instruments + PDPL + IAS, or 'Generic' for non-government",
+      "type": "string"
+    },
+    "classification_scheme": {
+      "title": "Classification Scheme",
+      "description": "Classification ladder used in Document Control headers: 'UK' (PUBLIC / OFFICIAL / OFFICIAL-SENSITIVE / SECRET) or 'UAE Smart Data' (Open / Shared / Confidential / Secret / Top Secret). Defaults to UK when blank.",
+      "type": "string"
+    },
+    "desktop_notifications": {
+      "title": "Desktop Notifications",
+      "description": "Enable terminal-emulator desktop notifications (OSC 9 / OSC 777) when SessionStart detects stale ArcKit artefacts. Set 'true' to enable. Works in iTerm2, Windows Terminal, WezTerm, ConEmu, urxvt, Ghostty, Warp. Defaults to disabled.",
+      "type": "string",
+      "default": "false"
+    }
+  }
+}
