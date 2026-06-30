@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "arckit-fr",
+  "version": "6.1.1",
+  "defaultEnabled": false,
+  "description": "French Public Sector Overlay for ArcKit — 12 commands for DINUM, ANSSI, RGPD/CNIL, EBIOS, PSSI, SecNumCloud, Diffusion Restreinte, public procurement, and ANSSI cartography. Requires arckit core plugin.",
+  "author": {
+    "name": "TractorJuice",
+    "url": "https://github.com/tractorjuice"
+  },
+  "homepage": "https://arckit.org",
+  "repository": "https://github.com/tractorjuice/arckit-claude",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "governance",
+    "france",
+    "anssi",
+    "compliance"
+  ],
+  "dependencies": [
+    {
+      "name": "arckit",
+      "version": "=6.1.1"
+    }
+  ]
+}
