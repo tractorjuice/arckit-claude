@@ -1,0 +1,103 @@
+recipe: togaf-adm-full
+schema_version: 1
+description: >
+  Full TOGAF ADM cycle: foundation artefacts, ADM Preliminary / Architecture
+  Vision, capability mapping, application inventory and rationalisation, gap
+  analysis, transition architecture, governance, optional change management,
+  and optional architecture repository synthesis.
+
+defaults:
+  version: "1.0"
+
+optional_targets:
+  ACHG:
+    description: Architecture change request for scoped post-baseline changes
+    default: false
+  REPO:
+    description: Architecture repository synthesis from completed ADM artefacts
+    default: false
+
+post_build_hooks:
+  - skill: arckit:health
+    args: ""
+  - skill: arckit:traceability
+    args: ""
+
+targets:
+  - id: PRIN
+    skill: arckit:principles
+    args: ""
+    output: { project: "000-global", type: PRIN }
+    deps: []
+
+  - id: REQ
+    skill: arckit:requirements
+    args: "{NAME}"
+    output: { project: "{P}-{NAME}", type: REQ }
+    deps: [PRIN]
+
+  - id: STKE
+    skill: arckit:stakeholders
+    args: "{NAME}"
+    output: { project: "{P}-{NAME}", type: STKE }
+    deps: [PRIN]
+
+  - id: STRATEGY
+    skill: arckit:strategy
+    args: ""
+    output: { project: "000-global", type: STRAT }
+    deps: [PRIN, STKE]
+
+  - id: ADMP
+    skill: arckit:adm-preliminary
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: ADMP }
+    deps: [PRIN, STKE, STRATEGY]
+
+  - id: BPCM
+    skill: arckit:business-capability-map
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: BPCM }
+    deps: [ADMP, REQ, STKE, PRIN]
+
+  - id: APP
+    skill: arckit:application-inventory
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: APP }
+    deps: [ADMP, BPCM]
+
+  - id: APPR
+    skill: arckit:application-rationalization
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: APPR }
+    deps: [APP, BPCM]
+
+  - id: GAPA
+    skill: arckit:gap-analysis
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: GAPA }
+    deps: [BPCM, APP, APPR, STRATEGY]
+
+  - id: TRANS
+    skill: arckit:transition-architecture
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: TRANS }
+    deps: [GAPA]
+
+  - id: BORD
+    skill: arckit:architecture-board
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: BORD }
+    deps: [PRIN, ADMP]
+
+  - id: ACHG
+    skill: arckit:architecture-change
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: ACHG }
+    deps: [BORD, TRANS]
+
+  - id: REPO
+    skill: arckit:architecture-repository
+    args: "000"
+    output: { project: "000-global", type: REPO }
+    deps: [PRIN, STRATEGY, ADMP, BPCM, APP, APPR, GAPA, TRANS, BORD]

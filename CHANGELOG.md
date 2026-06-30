@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0] — 2026-06-30
+
+### Added
+
+- **TOGAF ADM and agent architecture overlays.** Added the community
+  `arckit-togaf-adm` and `arckit-agent-architecture` plugins, with new recipe
+  targets, doc types, templates, generated extension coverage, and marketplace
+  wiring.
+
 ## [6.0.0] — 2026-06-30
 
 ### Added
