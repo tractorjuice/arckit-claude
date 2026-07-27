@@ -1,4 +1,4 @@
-# EMI / PI Safeguarding Assessment (`/arckit:uk-fs-safeguarding`)
+# EMI / PI Safeguarding Assessment (`/arckit-uk-finance:uk-fs-safeguarding`)
 
 > **Status**: EXPERIMENTAL · Community-contributed · **CRITICAL SEVERITY** · **Output is not
 > regulatory advice.** Safeguarding failures have led to firm collapse and FCA enforcement action.
@@ -11,7 +11,7 @@
 
 ## Purpose
 
-The `/arckit:uk-fs-safeguarding` command generates a safeguarding assessment for an authorised UK
+The `/arckit-uk-finance:uk-fs-safeguarding` command generates a safeguarding assessment for an authorised UK
 Electronic Money Institution (EMI) or Authorised Payment Institution (API) under the Electronic
 Money Regulations 2011 (EMR 2011 Reg 20–22) and the Payment Services Regulations 2017 (PSRs 2017
 Reg 23). It also covers Small Payment Institutions (SPIs) that elect to safeguard voluntarily under
@@ -51,7 +51,7 @@ arrangements change.
 Pass the project ID and product context as `$ARGUMENTS`:
 
 ```text
-/arckit:uk-fs-safeguarding 002 B2B virtual-account product
+/arckit-uk-finance:uk-fs-safeguarding 002 B2B virtual-account product
 ```
 
 The argument should include:
@@ -124,7 +124,7 @@ the consultation that preceded PS24/9; it is cited for completeness of the legis
 
 | Command | Relationship |
 |---------|--------------|
-| `/arckit:uk-fs-ctp-dependency` | The safeguarding bank or insurer is itself a critical third-party dependency. The CTP dependency register should include the safeguarding bank as a candidate designated or material non-CTP. |
+| `/arckit-uk-finance:uk-fs-ctp-dependency` | The safeguarding bank or insurer is itself a critical third-party dependency. The CTP dependency register should include the safeguarding bank as a candidate designated or material non-CTP. |
 | `/arckit:risk` | Safeguarding failure is a high-impact Orange Book risk. Cross-reference it in the project risk register with the FSSAFE document ID. |
 | `/arckit:operationalize` | The reconciliation runbook is a day-2 operational artefact. Once the safeguarding assessment defines the reconciliation cadence and sign-off chain, assemble the operational runbook via `/arckit:operationalize`. |
 | `/arckit:adr` | The safeguarding method choice (segregation vs insurance vs guarantee) is an architectural decision with cost, operational, and regulatory implications — record it as an ADR for traceability. |

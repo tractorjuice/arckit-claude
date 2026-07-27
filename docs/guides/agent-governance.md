@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:agent-governance` creates an Agent Governance Framework covering oversight model, approval workflow, audit requirements, monitoring KPIs, escalation procedures, incident response, and compliance mapping.
+`/arckit-agent-architecture:agent-governance` creates an Agent Governance Framework covering oversight model, approval workflow, audit requirements, monitoring KPIs, escalation procedures, incident response, and compliance mapping.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:agent-governance <agent, project ID, or agent programme>
+/arckit-agent-architecture:agent-governance <agent, project ID, or agent programme>
 ```
 
 Output: `projects/<id>/ARC-<id>-AAOV-v1.0.md`
@@ -56,6 +56,6 @@ Output: `projects/<id>/ARC-<id>-AAOV-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:agent-security` - Align security controls to governance requirements.
-- `/arckit:architecture-board` - Route high-impact agent decisions.
-- `/arckit:agent-maturity` - Assess programme maturity and improvement roadmap.
+- `/arckit-agent-architecture:agent-security` - Align security controls to governance requirements.
+- `/arckit-togaf-adm:architecture-board` - Route high-impact agent decisions.
+- `/arckit-agent-architecture:agent-maturity` - Assess programme maturity and improvement roadmap.

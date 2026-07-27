@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:architecture-change` creates a TOGAF Phase H Architecture Change Request with impact assessment, cost and benefit analysis, risk assessment, approval workflow, and ADM re-entry recommendation.
+`/arckit-togaf-adm:architecture-change` creates a TOGAF Phase H Architecture Change Request with impact assessment, cost and benefit analysis, risk assessment, approval workflow, and ADM re-entry recommendation.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:architecture-change <project ID, change type, and change summary>
+/arckit-togaf-adm:architecture-change <project ID, change type, and change summary>
 ```
 
 Output: `projects/<id>/changes/ARC-<id>-ACHG-001-v1.0.md`
@@ -68,6 +68,6 @@ Output: `projects/<id>/changes/ARC-<id>-ACHG-001-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:architecture-board` - Review and approve change requests.
-- `/arckit:transition-architecture` - Update work packages after approval.
-- `/arckit:gap-analysis` - Reassess gaps after the change.
+- `/arckit-togaf-adm:architecture-board` - Review and approve change requests.
+- `/arckit-togaf-adm:transition-architecture` - Update work packages after approval.
+- `/arckit-togaf-adm:gap-analysis` - Reassess gaps after the change.

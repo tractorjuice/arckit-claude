@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:agent-maturity` assesses an AI agent programme across design, governance, security, integration, and operations. It produces a current-state maturity view, target maturity, improvement roadmap, benchmarks, and traceability.
+`/arckit-agent-architecture:agent-maturity` assesses an AI agent programme across design, governance, security, integration, and operations. It produces a current-state maturity view, target maturity, improvement roadmap, benchmarks, and traceability.
 
 ---
 
@@ -23,7 +23,7 @@
 ## Command
 
 ```bash
-/arckit:agent-maturity <project ID or agent programme>
+/arckit-agent-architecture:agent-maturity <project ID or agent programme>
 ```
 
 Output: `projects/<id>/ARC-<id>-AAMT-v1.0.md`
@@ -73,12 +73,12 @@ Output: `projects/<id>/ARC-<id>-AAMT-v1.0.md`
 - Target levels are realistic for the investment and timeline.
 - Each improvement initiative has owner, success criteria, and dependency notes.
 - Security and governance maturity are not averaged away by strong design maturity.
-- Roadmap actions feed back into `/arckit:agent-design`, `/arckit:agent-governance`, and `/arckit:agent-security`.
+- Roadmap actions feed back into `/arckit-agent-architecture:agent-design`, `/arckit-agent-architecture:agent-governance`, and `/arckit-agent-architecture:agent-security`.
 
 ---
 
 ## Related Commands
 
 - `/arckit:maturity-model` - Assess wider enterprise architecture maturity.
-- `/arckit:agent-design` - Address design maturity gaps.
-- `/arckit:agent-governance` - Address governance maturity gaps.
+- `/arckit-agent-architecture:agent-design` - Address design maturity gaps.
+- `/arckit-agent-architecture:agent-governance` - Address governance maturity gaps.

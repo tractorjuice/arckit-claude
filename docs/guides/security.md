@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:security` generates NCSC Cloud Security Principles assertions and evidence for a G-Cloud
+`/arckit-uk-gcloud:security` generates NCSC Cloud Security Principles assertions and evidence for a G-Cloud
 service. It links the service design, SDD, and supplier profile to security controls, evidence,
 residual risks, and buyer-facing security statements.
 
@@ -11,7 +11,7 @@ residual risks, and buyer-facing security statements.
 ## Command
 
 ```bash
-/arckit:security <service project or service name>
+/arckit-uk-gcloud:security <service project or service name>
 ```
 
 Output:
@@ -59,4 +59,4 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SECA-v1.0.md
 
 - `/arckit:secure` - General secure-by-design assessment.
 - `/arckit:dfd` - Data flow and trust-boundary analysis.
-- `/arckit:review` - Final G-Cloud readiness check.
+- `/arckit-uk-gcloud:review` - Final G-Cloud readiness check.

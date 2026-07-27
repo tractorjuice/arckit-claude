@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:application-inventory` creates a portfolio catalogue of existing applications, including lifecycle state, ownership, technology stack, dependencies, strategic fit, and capability support. It is the foundation for application rationalisation and Phase C application architecture decisions.
+`/arckit-togaf-adm:application-inventory` creates a portfolio catalogue of existing applications, including lifecycle state, ownership, technology stack, dependencies, strategic fit, and capability support. It is the foundation for application rationalisation and Phase C application architecture decisions.
 
 ---
 
@@ -21,7 +21,7 @@
 ## Command
 
 ```bash
-/arckit:application-inventory <project ID or application scope>
+/arckit-togaf-adm:application-inventory <project ID or application scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-APP-v1.0.md`
@@ -47,10 +47,10 @@ Output: `projects/<id>/ARC-<id>-APP-v1.0.md`
 
 | Step | Command | Result |
 |------|---------|--------|
-| 1 | `/arckit:adm-preliminary` | Defines inventory scope |
-| 2 | `/arckit:business-capability-map` | Provides capability context |
-| 3 | `/arckit:application-inventory` | Creates the application portfolio baseline |
-| 4 | `/arckit:application-rationalization` | Makes keep, merge, replace, retire decisions |
+| 1 | `/arckit-togaf-adm:adm-preliminary` | Defines inventory scope |
+| 2 | `/arckit-togaf-adm:business-capability-map` | Provides capability context |
+| 3 | `/arckit-togaf-adm:application-inventory` | Creates the application portfolio baseline |
+| 4 | `/arckit-togaf-adm:application-rationalization` | Makes keep, merge, replace, retire decisions |
 
 ---
 
@@ -66,6 +66,6 @@ Output: `projects/<id>/ARC-<id>-APP-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:application-rationalization` - Decide portfolio actions.
-- `/arckit:gap-analysis` - Identify capability and application gaps.
-- `/arckit:transition-architecture` - Plan migration waves.
+- `/arckit-togaf-adm:application-rationalization` - Decide portfolio actions.
+- `/arckit-togaf-adm:gap-analysis` - Identify capability and application gaps.
+- `/arckit-togaf-adm:transition-architecture` - Plan migration waves.

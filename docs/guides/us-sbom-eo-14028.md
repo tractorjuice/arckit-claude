@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-sbom-eo-14028` produces the dual artefact required under Executive Order 14028 and OMB M-22-18 / M-23-16: (1) the CISA Secure Software Development Attestation Form completion, and (2) the Software Bill of Materials (SBOM) covering the agency-acquired software. The artefact aligns to **NIST SP 800-218 (SSDF)** for the secure-development practices being attested to, and to the **NTIA Minimum Elements for an SBOM** for the SBOM payload.
+`/arckit-us:us-sbom-eo-14028` produces the dual artefact required under Executive Order 14028 and OMB M-22-18 / M-23-16: (1) the CISA Secure Software Development Attestation Form completion, and (2) the Software Bill of Materials (SBOM) covering the agency-acquired software. The artefact aligns to **NIST SP 800-218 (SSDF)** for the secure-development practices being attested to, and to the **NTIA Minimum Elements for an SBOM** for the SBOM payload.
 
 This is the **software supply-chain evidence artefact**. Agencies cannot use a vendor's software for federal use without the vendor having attested to SSDF conformance; SBOM is required as supporting evidence at the agency's discretion (and increasingly as a hard requirement). Weak provenance attestations are a finding pattern that ripples through every downstream contract.
 
@@ -50,7 +50,7 @@ Reviewed by the agency software supply-chain security function, the System Owner
 ## Example Usage
 
 ```bash
-/arckit:us-sbom-eo-14028 001-citizen-benefits-portal
+/arckit-us:us-sbom-eo-14028 001-citizen-benefits-portal
 ```
 
 ---

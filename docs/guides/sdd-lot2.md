@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:sdd-lot2` generates the Service Definition Document for a G-Cloud Lot 2 cloud software
+`/arckit-uk-gcloud:sdd-lot2` generates the Service Definition Document for a G-Cloud Lot 2 cloud software
 service. Lot 2 covers SaaS and cloud-hosted software products delivered to public-sector buyers.
 
 ---
@@ -10,7 +10,7 @@ service. Lot 2 covers SaaS and cloud-hosted software products delivered to publi
 ## Command
 
 ```bash
-/arckit:sdd-lot2 <service project or service name>
+/arckit-uk-gcloud:sdd-lot2 <service project or service name>
 ```
 
 Output:
@@ -56,7 +56,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SDD-v1.0.md
 
 ## Related Commands
 
-- `/arckit:service-design` - Create the service design input.
-- `/arckit:pricing` - Generate pricing aligned to software tiers.
-- `/arckit:security` - Generate security assertions and evidence.
-- `/arckit:gcloud-competitors` - Benchmark the software service against marketplace rivals.
+- `/arckit-uk-gcloud:service-design` - Create the service design input.
+- `/arckit-uk-gcloud:pricing` - Generate pricing aligned to software tiers.
+- `/arckit-uk-gcloud:security` - Generate security assertions and evidence.
+- `/arckit-uk-gcloud:gcloud-competitors` - Benchmark the software service against marketplace rivals.

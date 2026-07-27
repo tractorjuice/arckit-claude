@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:eu-dora` generates a DORA (Digital Operational Resilience Act, Regulation EU 2022/2554) compliance assessment for financial sector entities. DORA applies from 17 January 2025 and replaces NIS2 for in-scope financial entities.
+`/arckit-eu:eu-dora` generates a DORA (Digital Operational Resilience Act, Regulation EU 2022/2554) compliance assessment for financial sector entities. DORA applies from 17 January 2025 and replaces NIS2 for in-scope financial entities.
 
 ---
 
@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-/arckit:eu-dora Assess DORA compliance for <financial entity type>
+/arckit-eu:eu-dora Assess DORA compliance for <financial entity type>
 ```
 
 Output: `projects/<id>/ARC-<id>-DORA-v1.0.md`
@@ -60,7 +60,7 @@ Output: `projects/<id>/ARC-<id>-DORA-v1.0.md`
 |-------|----------------|-----------------|
 | Discovery | Entity and ICT dependency mapping | `/arckit:requirements` |
 | Risk | ICT risk assessment | `/arckit:risk` |
-| Assessment | DORA compliance assessment | `/arckit:eu-dora` |
+| Assessment | DORA compliance assessment | `/arckit-eu:eu-dora` |
 | Security | Technical controls | `/arckit:secure` |
 
 ---

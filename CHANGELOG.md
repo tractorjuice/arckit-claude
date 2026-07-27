@@ -5,11 +5,37 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.7.1] — 2026-07-27
+
+### Fixed
+
+- **Overlay slash commands now resolve in Claude Code.** Claude Code namespaces plugin commands by the `name` in `plugin.json`. The core plugin is named `arckit`, so `/arckit:adr` works, but every overlay is named `arckit-<x>` — so none of the 105 overlay commands resolved under the documented `/arckit:` prefix. Confirmed live: `arckit:repo-audit` returns "Unknown skill" while `arckit-repo:repo-docs` runs. The published Claude plugins now carry the namespaced form (`/arckit-uae:uae-ai-charter`, `/arckit-togaf-adm:adm-preliminary`, `/arckit-repo:repo-audit`), applied at publish time by `scripts/claude_command_namespacing.py` from both `sync-claude-plugin-layout.py` and `push-extensions.sh` (#685, #686).
+
+  The command **sources** deliberately keep the portable `/arckit:X` form, because `converter.py` already rewrites it per target: Copilot gets `/arckit-X`, Codex and Kimi get their own skill prefixes, and Gemini and OpenCode keep `/arckit:X` because the converter merges every overlay into one flat `arckit` namespace. Rewriting the 2,698 source references would have broken seven working formats to fix one. Claude Code was simply the only target with no rewrite step.
+
+- **`/arckit-repo:repo-audit` no longer scores a codebase against an unrelated project.** Mode inference assumed any project in the repository described the audited code. Auditing this repo, whose only project is a UK consulting *market study*, would have produced a full page of confident Met/Not-met verdicts against 28 irrelevant requirements. The command now confirms the project actually describes the repository, asks when the evidence is ambiguous, and falls back to cold mode when correspondence is unconfirmed. `--check` reports the judgement (#684).
+
+- **`create-project.sh` failed silently on a fresh repository.** With no `projects/000-global/`, `find` exited non-zero, `2>/dev/null` hid the reason, and `set -euo pipefail` killed the script at the assignment — three lines before the error that would have said `Run: /arckit:principles`. It exited 1 with zero bytes on both streams, in exactly the case that most needs the guidance. Fixed in both copies (#684).
+
+- **Three dangling command references** that nothing validated: `/arckit:hld` and `/arckit:dld` (uk-nhs-dtac) and `/arckit:app-inventory` (togaf application-rationalization). No commands by those names have ever existed. `check_references.py` checks plugin-root paths and handoffs, not whether a referenced command exists (#685).
+
+- **The `/arckit-repo:repo-audit` guide was unreachable from the published site.** It shipped in v6.7.0 and reached both guide trees, but nothing linked to it, so it could only be found by guessing its `guide-viewer.html` URL. Added to `docs/guides.html` and `docs/manifest.json`, with reciprocal cross-references between `repo-docs` and `repo-audit`, which had only ever pointed one way (#681).
+
+### Added
+
+- **`scripts/check-guide-site-links.py`**, wired into `lint-markdown.yml`. `docs/guides.html` and `docs/roles.html` are hand-maintained and nothing derived them from `docs/guides/`, so a guide could pass `check-guide-parity.py`, ship to all seven extensions, and still be invisible on the site. Checks both directions — unlinked guides and dead links — and treats a guide as reachable from any site page, so role guides on `roles.html` are covered without a blanket exemption that would hide one going missing (#682).
+
+- **`scripts/generate-docs-manifest.py`**, wired into `lint-markdown.yml`. `docs/manifest.json` is published at `arckit.org/manifest.json` as a programmatic document index, and nothing in the site HTML reads it, so its drift went unnoticed: six months stale and roughly a quarter complete (54 of 238 guides, 45 of 166 templates, 2 of 62 articles), with one entry pointing at a deleted file. Now generated from disk — 463 documents across 33 groups — indexing **git-tracked files only**, so gitignored working-tree files are never advertised as published (#683).
+
+### Changed
+
+- `docs/manifest.json` is now generated, never hand-edited. Run `python3 scripts/generate-docs-manifest.py --write` after adding a guide, template, or article. `--check` ignores the `generated` timestamp so a rebuild on a quiet day is not reported as drift.
+
 ## [6.7.0] — 2026-07-27
 
 ### Added
 
-- **`/arckit:repo-audit`** in the optional `arckit-repo` plugin (#616). Audits a codebase against architecture principles and requirements. Accepts the current repository, a local path, or a public GitHub/GitLab URL; remote targets are shallow-cloned (`--depth 100`, no submodules) to a temporary directory after confirmation, and deleted afterwards. Two modes are inferred, never flagged: **conformance** scores the codebase against the project's `PRIN`/`REQ` artefacts, giving each principle and requirement a Met / Partial / Not met / Not evidenced verdict with the source path that justifies it; **cold** runs a standalone as-built audit and emits a seed capability list. Unlike `/arckit:conformance` it degrades rather than hard-erroring when prerequisites are thin, because auditing an inherited codebase is usually the first thing a user does. Findings carry a severity *and* a confidence (Verified / Inferred / Absent), and the Blocking Decisions section emits every implied-but-unrecorded decision as a ready-to-file ADR stub. Three rules are absolute: never execute code from the audited repository (static reading only, because the code is untrusted at the point it is read), never write a discovered secret's value into the report, and never write into the audited repo. Private repositories are out of scope; clone locally and audit the path. Claude Code only, like `/arckit:repo-docs`.
+- **`/arckit-repo:repo-audit`** in the optional `arckit-repo` plugin (#616). Audits a codebase against architecture principles and requirements. Accepts the current repository, a local path, or a public GitHub/GitLab URL; remote targets are shallow-cloned (`--depth 100`, no submodules) to a temporary directory after confirmation, and deleted afterwards. Two modes are inferred, never flagged: **conformance** scores the codebase against the project's `PRIN`/`REQ` artefacts, giving each principle and requirement a Met / Partial / Not met / Not evidenced verdict with the source path that justifies it; **cold** runs a standalone as-built audit and emits a seed capability list. Unlike `/arckit:conformance` it degrades rather than hard-erroring when prerequisites are thin, because auditing an inherited codebase is usually the first thing a user does. Findings carry a severity *and* a confidence (Verified / Inferred / Absent), and the Blocking Decisions section emits every implied-but-unrecorded decision as a ready-to-file ADR stub. Three rules are absolute: never execute code from the audited repository (static reading only, because the code is untrusted at the point it is read), never write a discovered secret's value into the report, and never write into the audited repo. Private repositories are out of scope; clone locally and audit the path. Claude Code only, like `/arckit-repo:repo-docs`.
 - **`CDAU` doc-type** (Codebase Audit, Governance, multi-instance) writing to a new `projects/{PID}-{name}/audits/` subdirectory, so one project can audit several repositories and a re-audit does not overwrite its predecessor.
 - **`scripts/check-multi-instance-parity.py`**, wired into `lint-markdown.yml`. `MULTI_INSTANCE_TYPES` is duplicated across `doc-types.mjs` and *two* copies of `generate-document-id.sh`, and nothing enforced agreement.
 
@@ -20,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **`arckit-repo` is no longer exempt from the shared-asset sync.** `SYNC_EXEMPT_PLUGINS` listed it as a tooling plugin with no governance commands, which was true of `/arckit:repo-docs` and is not true of `/arckit:repo-audit`: a `CDAU` artefact carries a Document Control header that resolves `${CLAUDE_PLUGIN_ROOT}/templates/_partials/` against the plugin's own root, so it must carry its own copy.
+- **`arckit-repo` is no longer exempt from the shared-asset sync.** `SYNC_EXEMPT_PLUGINS` listed it as a tooling plugin with no governance commands, which was true of `/arckit-repo:repo-docs` and is not true of `/arckit-repo:repo-audit`: a `CDAU` artefact carries a Document Control header that resolves `${CLAUDE_PLUGIN_ROOT}/templates/_partials/` against the plugin's own root, so it must carry its own copy.
 - `tests/plugin/test_template_consistency.py` now includes `arckit-repo` in its plugin scan, for the same reason.
 
 ## [6.6.0] — 2026-07-27
@@ -103,7 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Repository plugin.** Added the optional `arckit-repo` plugin, starting with
-  `/arckit:repo-docs` to generate and maintain source-grounded, agent-readable
+  `/arckit-repo:repo-docs` to generate and maintain source-grounded, agent-readable
   repository documentation under `docs/repository/`, adapting OpenWiki-style
   targeted discovery and incremental update prompts for ArcKit. It is a
   Claude Code only tooling plugin with no core dependency, following the
@@ -470,7 +496,7 @@ See the root [`CHANGELOG.md`](../CHANGELOG.md#550--2026-05-28) for the full rebr
 ### Fixed
 
 - `notify-stale-artifacts.mjs` now reads the `desktop_notifications` userConfig value from the `CLAUDE_PLUGIN_OPTION_DESKTOP_NOTIFICATIONS` env var instead of via `${user_config.*}` argv substitution in `hooks.json`. The argv substitution path aborted the hook with `plugin option "desktop_notifications" isnt set` on fresh installs where the user had never opened plugin configuration, even with `"default": "false"` declared on the userConfig field. The env-var path is documented as the parallel access mechanism ("All values are exported to plugin subprocesses as `CLAUDE_PLUGIN_OPTION_<KEY>` environment variables") and degrades cleanly to `undefined` when the field is unset. The `"default": "false"` declaration is retained as a UX nicety for the configuration prompt.
-- `hooks/sync-guides.mjs` now surfaces NHS clinical-safety artefacts in the manifest. Marcus Baw's `SAFETY.md` / `SAFETY-CASE.md` / `HAZARD-LOG.md` files (and the `clinical-safety/deployment/` companions from `/arckit:uk-nhs-dcb0160`) deliberately skip the `ARC-` prefix, so they were excluded by the project scanner. The hook now picks up any `.md` file in `projects/{NNN}/clinical-safety/` and `projects/{NNN}/clinical-safety/deployment/`, attaches them to the project's documents list with category `Clinical Safety` and the file's first heading as title. Filenames are preserved verbatim.
+- `hooks/sync-guides.mjs` now surfaces NHS clinical-safety artefacts in the manifest. Marcus Baw's `SAFETY.md` / `SAFETY-CASE.md` / `HAZARD-LOG.md` files (and the `clinical-safety/deployment/` companions from `/arckit-uk-nhs:uk-nhs-dcb0160`) deliberately skip the `ARC-` prefix, so they were excluded by the project scanner. The hook now picks up any `.md` file in `projects/{NNN}/clinical-safety/` and `projects/{NNN}/clinical-safety/deployment/`, attaches them to the project's documents list with category `Clinical Safety` and the file's first heading as title. Filenames are preserved verbatim.
 
 ### Added
 

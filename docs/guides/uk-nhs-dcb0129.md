@@ -1,6 +1,6 @@
 # NHS DCB0129 Manufacturer Clinical Safety Case Guide
 
-> **Command**: `/arckit:uk-nhs-dcb0129` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
+> **Command**: `/arckit-uk-nhs:uk-nhs-dcb0129` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
 
 ## Purpose
 
@@ -57,8 +57,8 @@ This guide and the command's output are **not** clinical, legal, or regulatory a
 
 ## Related commands
 
-- `/arckit:uk-nhs-dcb0160` — deployer-side companion (DCB0160)
-- `/arckit:uk-nhs-dtac` — NHS DTAC v3 (consumes the SAFETY-CASE.md content in Section 1)
-- `/arckit:uk-mdr-classification` — if the product is also a medical device, DCB0129 hazards feed the ISO 14971 risk file
+- `/arckit-uk-nhs:uk-nhs-dcb0160` — deployer-side companion (DCB0160)
+- `/arckit-uk-nhs:uk-nhs-dtac` — NHS DTAC v3 (consumes the SAFETY-CASE.md content in Section 1)
+- `/arckit-uk-nhs:uk-mdr-classification` — if the product is also a medical device, DCB0129 hazards feed the ISO 14971 risk file
 - `/arckit:risk` — project-level risk register cross-references clinical hazards
 - `/arckit:dpia` — privacy hazards may overlap with clinical hazards

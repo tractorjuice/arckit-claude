@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Official | **ArcKit Version**: [VERSION]
 
-`/arckit:repo-docs` generates and maintains an agent-readable source wiki for a repository. It is designed for implementation onboarding, future agent sessions, and safe change work.
+`/arckit-repo:repo-docs` generates and maintains an agent-readable source wiki for a repository. It is designed for implementation onboarding, future agent sessions, and safe change work.
 
 The command ships in the optional `arckit-repo` plugin. It is inspired by OpenWiki's repository documentation workflow, but it runs as an ArcKit-native command instead of adding the OpenWiki CLI and provider configuration as dependencies.
 
@@ -19,25 +19,25 @@ claude plugin install arckit-repo
 Create the first repository wiki:
 
 ```text
-/arckit:repo-docs --init
+/arckit-repo:repo-docs --init
 ```
 
 Refresh existing repository docs after implementation changes:
 
 ```text
-/arckit:repo-docs --update
+/arckit-repo:repo-docs --update
 ```
 
 Document one area only:
 
 ```text
-/arckit:repo-docs document hooks and release flow only
+/arckit-repo:repo-docs document hooks and release flow only
 ```
 
 Preview gaps without writing files:
 
 ```text
-/arckit:repo-docs --check
+/arckit-repo:repo-docs --check
 ```
 
 ---
@@ -63,7 +63,7 @@ Focused runs may update a smaller subset.
 
 ## How It Works
 
-`/arckit:repo-docs` uses a targeted discovery process:
+`/arckit-repo:repo-docs` uses a targeted discovery process:
 
 - reads the root README, changelog, agent instructions, and existing docs
 - lists source files with `rg --files` or `find`
@@ -80,11 +80,12 @@ The command can create a temporary `docs/repository/_plan.md` while preparing a 
 
 | Command | Scope | Output |
 |---|---|---|
-| `/arckit:repo-docs` | Source-code repository understanding | `docs/repository/*.md` |
+| `/arckit-repo:repo-docs` | Source-code repository understanding | `docs/repository/*.md` |
+| `/arckit-repo:repo-audit` | Source-code repository assessment | `ARC-{PID}-CDAU-*.md` in `audits/` |
 | `/arckit:pages` | Static site for ArcKit artifacts and guides | `docs/index.html`, `docs/manifest.json`, `docs/llms.txt` |
-| `/arckit:architecture-repository` | TOGAF-style governance repository | `ARC-000-REPO-v*.md` or project repository artifact |
+| `/arckit-togaf-adm:architecture-repository` | TOGAF-style governance repository | `ARC-000-REPO-v*.md` or project repository artifact |
 
-Use `/arckit:repo-docs` when the question is "how does this repo work?" Use `/arckit:pages` when the question is "how do we publish ArcKit artifacts?" Use the TOGAF architecture repository when the question is "what reusable architecture knowledge has this organisation captured?"
+Use `/arckit-repo:repo-docs` when the question is "how does this repo work?" Use `/arckit-repo:repo-audit` when the question is "is this repo any good, and what did we never write down?" Use `/arckit:pages` when the question is "how do we publish ArcKit artifacts?" Use the TOGAF architecture repository when the question is "what reusable architecture knowledge has this organisation captured?"
 
 ---
 

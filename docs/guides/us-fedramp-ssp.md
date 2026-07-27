@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-fedramp-ssp` produces a FedRAMP System Security Plan (SSP) using the current Rev 5 SSP template structure. It documents the authorization boundary, system architecture, control implementations, shared responsibility (customer vs. CSP), interconnections, data flows, and the personnel and roles supporting Authority-to-Operate. The SSP is the **primary artefact** in the FedRAMP authorization package — every other artefact (SAP, SAR, POA&M, ConMon) references and is constrained by it.
+`/arckit-us:us-fedramp-ssp` produces a FedRAMP System Security Plan (SSP) using the current Rev 5 SSP template structure. It documents the authorization boundary, system architecture, control implementations, shared responsibility (customer vs. CSP), interconnections, data flows, and the personnel and roles supporting Authority-to-Operate. The SSP is the **primary artefact** in the FedRAMP authorization package — every other artefact (SAP, SAR, POA&M, ConMon) references and is constrained by it.
 
 The SSP is read end-to-end by the 3PAO during the assessment, by the JAB or sponsoring Agency's AO during the authorization decision, and by FedRAMP PMO during package review. Errors in the authorization boundary or shared-responsibility matrix surface as ATO blockers; weak control narratives drive extensive 3PAO interview cycles. Treat the SSP as a serious technical document, not a marketing artefact.
 
@@ -50,7 +50,7 @@ Reviewed by the CSP's CISO, the System Owner, ISSO, AO, and the FedRAMP PMO. Man
 ## Example Usage
 
 ```bash
-/arckit:us-fedramp-ssp 001-citizen-benefits-portal
+/arckit-us:us-fedramp-ssp 001-citizen-benefits-portal
 ```
 
 ---

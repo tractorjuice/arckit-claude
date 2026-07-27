@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:application-rationalization` turns the application inventory into portfolio decisions. It applies keep, merge, replace, and retire recommendations with rationale, target-state implications, benefits, risks, and implementation sequencing.
+`/arckit-togaf-adm:application-rationalization` turns the application inventory into portfolio decisions. It applies keep, merge, replace, and retire recommendations with rationale, target-state implications, benefits, risks, and implementation sequencing.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:application-rationalization <project ID or portfolio scope>
+/arckit-togaf-adm:application-rationalization <project ID or portfolio scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-APPR-v1.0.md`
@@ -66,6 +66,6 @@ Output: `projects/<id>/ARC-<id>-APPR-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:gap-analysis` - Reassess gaps after rationalisation.
-- `/arckit:transition-architecture` - Convert decisions into work packages.
-- `/arckit:architecture-board` - Approve high-impact portfolio decisions.
+- `/arckit-togaf-adm:gap-analysis` - Reassess gaps after rationalisation.
+- `/arckit-togaf-adm:transition-architecture` - Convert decisions into work packages.
+- `/arckit-togaf-adm:architecture-board` - Approve high-impact portfolio decisions.

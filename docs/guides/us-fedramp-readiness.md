@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-fedramp-readiness` generates a FedRAMP Readiness Assessment Report (RAR) — the 3PAO-led capability-and-evidence assessment that determines whether a CSP is ready to enter a full FedRAMP authorization. The RAR scores the CSP's technical capability, documentation maturity, and the presence of the foundational evidence (architecture, ICAM, encryption, audit, ConMon, IR) demanded by the JAB or sponsoring Agency.
+`/arckit-us:us-fedramp-readiness` generates a FedRAMP Readiness Assessment Report (RAR) — the 3PAO-led capability-and-evidence assessment that determines whether a CSP is ready to enter a full FedRAMP authorization. The RAR scores the CSP's technical capability, documentation maturity, and the presence of the foundational evidence (architecture, ICAM, encryption, audit, ConMon, IR) demanded by the JAB or sponsoring Agency.
 
 A "FedRAMP Ready" designation, published on the FedRAMP Marketplace, is the public signal that a CSP can credibly pursue authorization. RAR findings shape the POA&M, surface the gating gaps, and feed the JAB prioritisation discussion. Optimistic POA&M dates are the single most common reason a Ready package is bounced back to the CSP.
 
@@ -48,7 +48,7 @@ Reviewed by the 3PAO (lead assessor signature required), the CSP's CISO, and Fed
 ## Example Usage
 
 ```bash
-/arckit:us-fedramp-readiness 001-citizen-benefits-portal
+/arckit-us:us-fedramp-readiness 001-citizen-benefits-portal
 ```
 
 ---

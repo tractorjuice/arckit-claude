@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Official | **ArcKit Version**: [VERSION]
 
-`/arckit:repo-audit` reads a real codebase and produces a governance-shaped audit: the as-built architecture, scored against your architecture principles and requirements where they exist, with every gap expressed as a proposed ADR.
+`/arckit-repo:repo-audit` reads a real codebase and produces a governance-shaped audit: the as-built architecture, scored against your architecture principles and requirements where they exist, with every gap expressed as a proposed ADR.
 
 It is the inverse of the usual ArcKit flow. Most commands generate artefacts that a build will later satisfy. This one reads a build that already exists and works backwards to the governance record it should have had.
 
@@ -21,25 +21,25 @@ claude plugin install arckit-repo
 Audit the repository you are working in:
 
 ```text
-/arckit:repo-audit
+/arckit-repo:repo-audit
 ```
 
 Audit a public repository elsewhere:
 
 ```text
-/arckit:repo-audit https://github.com/org/service
+/arckit-repo:repo-audit https://github.com/org/service
 ```
 
 Narrow the audit to what you care about:
 
 ```text
-/arckit:repo-audit https://github.com/org/service security and resilience
+/arckit-repo:repo-audit https://github.com/org/service security and resilience
 ```
 
 See what would happen without writing or cloning anything:
 
 ```text
-/arckit:repo-audit https://gitlab.com/group/project --check
+/arckit-repo:repo-audit https://gitlab.com/group/project --check
 ```
 
 ---
@@ -53,6 +53,10 @@ You never pass a mode flag. The command works out which one applies.
 **Cold mode** runs when there is no project, or no principles and no requirements. You get a standalone as-built architecture audit plus a seed capability list you can feed into `/arckit:requirements`.
 
 If only one of the two artefacts exists, the audit scores against it and marks the other as not assessed. Unlike `/arckit:conformance`, it does not refuse to run when prerequisites are thin, because auditing an inherited codebase is often the first thing you do on a project.
+
+**A project existing in your repo is not enough.** Before scoring anything, the audit checks that the project's requirements actually describe the codebase you pointed it at, and asks you if the evidence is ambiguous. A repository can easily hold a project about a market study, a policy, or a procurement; scoring source code against those would produce a page of confident verdicts that mean nothing. When correspondence is not confirmed, the audit falls back to cold mode and says so in its Audit Scope.
+
+Run with `--check` first to see which project and mode it would pick, without writing anything.
 
 ---
 
@@ -99,12 +103,12 @@ The report has eleven sections. Three are worth calling out:
 
 | Command | What it does | How it differs |
 |---------|--------------|----------------|
-| `/arckit:repo-docs` | Documents a repository | Describes. This command judges. |
+| `/arckit-repo:repo-docs` | Documents a repository | Describes. This command judges. |
 | `/arckit:conformance` | Decided-vs-designed conformance | Reads ArcKit artefacts only, never source code. |
 | `/arckit:analyze` | Governance quality across artefacts | Artefact-only. No codebase involved. |
 | `/arckit:gov-reuse` | Finds reusable UK government code | Scores external repos for reuse candidacy, not architecture conformance. |
 
-A natural sequence for an inherited codebase: `/arckit:repo-audit` to find out what you have, `/arckit:adr` to record the decisions it surfaced, `/arckit:risk` to promote the CRITICAL and HIGH findings, then `/arckit:conformance` once there are ADRs to conform to.
+A natural sequence for an inherited codebase: `/arckit-repo:repo-audit` to find out what you have, `/arckit:adr` to record the decisions it surfaced, `/arckit:risk` to promote the CRITICAL and HIGH findings, then `/arckit:conformance` once there are ADRs to conform to.
 
 ---
 

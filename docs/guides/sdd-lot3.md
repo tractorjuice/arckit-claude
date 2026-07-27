@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:sdd-lot3` generates the Service Definition Document for a G-Cloud Lot 3 cloud support
+`/arckit-uk-gcloud:sdd-lot3` generates the Service Definition Document for a G-Cloud Lot 3 cloud support
 service. Lot 3 covers cloud consulting, migration, implementation, optimisation, training, support,
 and managed services.
 
@@ -11,7 +11,7 @@ and managed services.
 ## Command
 
 ```bash
-/arckit:sdd-lot3 <service project or service name>
+/arckit-uk-gcloud:sdd-lot3 <service project or service name>
 ```
 
 Output:
@@ -56,7 +56,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SDD-v1.0.md
 
 ## Related Commands
 
-- `/arckit:service-design` - Create the service design input.
-- `/arckit:pricing` - Generate day-rate, package, or outcome-based pricing.
-- `/arckit:gcloud-competitors` - Compare against similar support services.
-- `/arckit:review` - Check readiness before submission.
+- `/arckit-uk-gcloud:service-design` - Create the service design input.
+- `/arckit-uk-gcloud:pricing` - Generate day-rate, package, or outcome-based pricing.
+- `/arckit-uk-gcloud:gcloud-competitors` - Compare against similar support services.
+- `/arckit-uk-gcloud:review` - Check readiness before submission.

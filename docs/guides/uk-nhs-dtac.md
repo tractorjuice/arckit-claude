@@ -1,12 +1,12 @@
 # NHS DTAC v3 Assessment Guide
 
-> **Command**: `/arckit:uk-nhs-dtac` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
+> **Command**: `/arckit-uk-nhs:uk-nhs-dtac` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
 
 ## Purpose
 
 Generates an NHS Digital Technology Assessment Criteria (DTAC) v3 assessment for a digital health product being procured or assured by an NHS organisation. DTAC is the de facto NHS England procurement-assurance baseline used by NHS Trust procurement teams, ICS digital teams, NHS Supply Chain framework buyers, and NHS England innovation pathways.
 
-DTAC overlaps but does not replace MHRA medical-device regulation (run `/arckit:uk-mdr-classification` if the product is a medical device) or the GDS Service Standard (run `/arckit:service-assessment` if the product is also a GDS-assessed service).
+DTAC overlaps but does not replace MHRA medical-device regulation (run `/arckit-uk-nhs:uk-mdr-classification` if the product is a medical device) or the GDS Service Standard (run `/arckit:service-assessment` if the product is also a GDS-assessed service).
 
 ## What it produces
 
@@ -46,10 +46,10 @@ DTAC pass status does not constitute MHRA medical-device approval, does not cons
 
 ## Related commands
 
-- `/arckit:uk-nhs-dcb0129` — manufacturer Clinical Safety Case (Section 1 evidence)
-- `/arckit:uk-nhs-dcb0160` — deployer Clinical Safety Case (Section 1 evidence, deploying-organisation perspective)
+- `/arckit-uk-nhs:uk-nhs-dcb0129` — manufacturer Clinical Safety Case (Section 1 evidence)
+- `/arckit-uk-nhs:uk-nhs-dcb0160` — deployer Clinical Safety Case (Section 1 evidence, deploying-organisation perspective)
 - `/arckit:dpia` — Section 2 evidence
 - `/arckit:atrs` — AI annex evidence
 - `/arckit:secure` — Section 3 evidence
 - `/arckit:service-assessment` — overlapping NHS Service Standard assessment
-- `/arckit:uk-mdr-classification` — for medical-device determination, parallel to DTAC
+- `/arckit-uk-nhs:uk-mdr-classification` — for medical-device determination, parallel to DTAC

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:transition-architecture` creates the TOGAF ADM Phase F migration plan. It defines intermediate transition states, work packages, migration waves, dependencies, resources, risks, and acceptance criteria.
+`/arckit-togaf-adm:transition-architecture` creates the TOGAF ADM Phase F migration plan. It defines intermediate transition states, work packages, migration waves, dependencies, resources, risks, and acceptance criteria.
 
 ---
 
@@ -21,7 +21,7 @@
 ## Command
 
 ```bash
-/arckit:transition-architecture <project ID or migration scope>
+/arckit-togaf-adm:transition-architecture <project ID or migration scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-TRANS-v1.0.md`
@@ -44,11 +44,11 @@ Output: `projects/<id>/ARC-<id>-TRANS-v1.0.md`
 
 ## Workflow
 
-1. Run `/arckit:gap-analysis` to identify prioritised gaps.
-2. Run `/arckit:application-rationalization` when application migration is in scope.
-3. Run `/arckit:transition-architecture` to group work into transition states.
-4. Send the plan through `/arckit:architecture-board` for governance approval.
-5. Use `/arckit:architecture-change` for later scope or sequencing changes.
+1. Run `/arckit-togaf-adm:gap-analysis` to identify prioritised gaps.
+2. Run `/arckit-togaf-adm:application-rationalization` when application migration is in scope.
+3. Run `/arckit-togaf-adm:transition-architecture` to group work into transition states.
+4. Send the plan through `/arckit-togaf-adm:architecture-board` for governance approval.
+5. Use `/arckit-togaf-adm:architecture-change` for later scope or sequencing changes.
 
 ---
 
@@ -64,6 +64,6 @@ Output: `projects/<id>/ARC-<id>-TRANS-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:architecture-board` - Approve transition plans and exceptions.
-- `/arckit:architecture-change` - Manage changes to approved transition scope.
+- `/arckit-togaf-adm:architecture-board` - Approve transition plans and exceptions.
+- `/arckit-togaf-adm:architecture-change` - Manage changes to approved transition scope.
 - `/arckit:roadmap` - Maintain strategic timeline alignment.

@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-fisma-categorization` produces a FIPS Publication 199 security categorization for a federal civilian information system. It walks the system's information types (using NIST SP 800-60 Vol 2 Rev 1 as the catalogue), assigns provisional impact levels (Low / Moderate / High) to each of the CIA objectives, then applies the high-water mark to derive the overall system categorization.
+`/arckit-us:us-fisma-categorization` produces a FIPS Publication 199 security categorization for a federal civilian information system. It walks the system's information types (using NIST SP 800-60 Vol 2 Rev 1 as the catalogue), assigns provisional impact levels (Low / Moderate / High) to each of the CIA objectives, then applies the high-water mark to derive the overall system categorization.
 
 The categorization is the **anchor artefact for FISMA compliance** — it determines the NIST SP 800-53 baseline (Low / Moderate / High), drives FedRAMP impact-level selection, and informs the rigour of every downstream control, assessment, and authorization activity. Without a defensible categorization, no Authority to Operate (ATO) package can be assembled.
 
@@ -47,7 +47,7 @@ Reviewed by the Information System Security Officer (ISSO), the System Owner, an
 ## Example Usage
 
 ```bash
-/arckit:us-fisma-categorization 001-citizen-benefits-portal
+/arckit-us:us-fisma-categorization 001-citizen-benefits-portal
 ```
 
 ---

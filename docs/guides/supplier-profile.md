@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:supplier-profile` creates or updates the supplier-wide profile used by the UK G-Cloud
+`/arckit-uk-gcloud:supplier-profile` creates or updates the supplier-wide profile used by the UK G-Cloud
 supplier overlay. The profile records company details, contacts, certifications, insurance,
 security posture, data-centre locations, accreditations, and reusable evidence for each service
 submission.
@@ -12,7 +12,7 @@ submission.
 ## Command
 
 ```bash
-/arckit:supplier-profile <supplier name or website URL>
+/arckit-uk-gcloud:supplier-profile <supplier name or website URL>
 ```
 
 Output:
@@ -45,11 +45,11 @@ projects/000-global/supplier/ARC-000-SUPP-v1.0.md
 
 ## Workflow
 
-1. Run `/arckit:supplier-profile`.
+1. Run `/arckit-uk-gcloud:supplier-profile`.
 2. Review any existing `ARC-000-SUPP` file before updating it.
 3. Provide or confirm company, contact, certification, insurance, and security details.
-4. Use the profile as shared input to `/arckit:service-design`, `/arckit:declaration`,
-   `/arckit:pricing`, `/arckit:security`, and `/arckit:review`.
+4. Use the profile as shared input to `/arckit-uk-gcloud:service-design`, `/arckit-uk-gcloud:declaration`,
+   `/arckit-uk-gcloud:pricing`, `/arckit-uk-gcloud:security`, and `/arckit-uk-gcloud:review`.
 
 ---
 
@@ -65,6 +65,6 @@ projects/000-global/supplier/ARC-000-SUPP-v1.0.md
 
 ## Related Commands
 
-- `/arckit:service-design` - Create a per-service G-Cloud offering.
-- `/arckit:declaration` - Generate the supplier declaration.
-- `/arckit:submission-pack` - Bundle approved documents for submission.
+- `/arckit-uk-gcloud:service-design` - Create a per-service G-Cloud offering.
+- `/arckit-uk-gcloud:declaration` - Generate the supplier declaration.
+- `/arckit-uk-gcloud:submission-pack` - Bundle approved documents for submission.

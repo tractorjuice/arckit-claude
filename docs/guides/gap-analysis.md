@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:gap-analysis` compares current and target architecture states, scores gaps, maps them to workstreams, and prepares the evidence base for TOGAF ADM Phase E and migration planning.
+`/arckit-togaf-adm:gap-analysis` compares current and target architecture states, scores gaps, maps them to workstreams, and prepares the evidence base for TOGAF ADM Phase E and migration planning.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:gap-analysis <project ID or gap-analysis scope>
+/arckit-togaf-adm:gap-analysis <project ID or gap-analysis scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-GAPA-v1.0.md`
@@ -65,6 +65,6 @@ Output: `projects/<id>/ARC-<id>-GAPA-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:transition-architecture` - Turn gaps into migration waves.
-- `/arckit:architecture-board` - Present prioritised gaps for governance.
-- `/arckit:architecture-change` - Reassess gaps after approved changes.
+- `/arckit-togaf-adm:transition-architecture` - Turn gaps into migration waves.
+- `/arckit-togaf-adm:architecture-board` - Present prioritised gaps for governance.
+- `/arckit-togaf-adm:architecture-change` - Reassess gaps after approved changes.

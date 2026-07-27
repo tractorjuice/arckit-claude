@@ -1,4 +1,4 @@
-# SCA-RTS Exemption Design (`/arckit:uk-fs-sca-rts`)
+# SCA-RTS Exemption Design (`/arckit-uk-finance:uk-fs-sca-rts`)
 
 > **Status**: EXPERIMENTAL · Community-contributed · **Output is not regulatory advice.**
 > The SCA exemption design MUST be reviewed, materially supplemented, and signed off by qualified
@@ -9,7 +9,7 @@
 
 ## Purpose
 
-The `/arckit:uk-fs-sca-rts` command generates an SCA-RTS exemption design pack for an authorised
+The `/arckit-uk-finance:uk-fs-sca-rts` command generates an SCA-RTS exemption design pack for an authorised
 UK Payment Service Provider (PSP), Electronic Money Institution (EMI), or Payment Institution (PI)
 subject to the Payment Services Regulations 2017 (PSRs 2017) and the UK Technical Standards on
 Strong Customer Authentication (UK SCA-RTS, FCA 2020/70 as amended by FCA PS21/19).
@@ -45,7 +45,7 @@ engagement.
 Pass the project ID and product context as `$ARGUMENTS`:
 
 ```text
-/arckit:uk-fs-sca-rts 001 card-not-present checkout flow
+/arckit-uk-finance:uk-fs-sca-rts 001 card-not-present checkout flow
 ```
 
 The argument should include:
@@ -116,7 +116,7 @@ Firms with EU-passported services must maintain separate assessments.
 
 | Command | Relationship |
 |---------|--------------|
-| `/arckit:uk-fs-safeguarding` | PSP scope often overlaps EMI scope — if the firm also issues e-money, safeguarding is a parallel obligation. Run alongside or immediately after. |
+| `/arckit-uk-finance:uk-fs-safeguarding` | PSP scope often overlaps EMI scope — if the firm also issues e-money, safeguarding is a parallel obligation. Run alongside or immediately after. |
 | `/arckit:dpia` | SCA design involves biometrics, device fingerprinting, and behavioural data. A DPIA is required under UK GDPR where biometric data is processed for authentication. |
 | `/arckit:adr` | Exemption application choices (e.g. whether to implement TRA at issuer or acquirer layer) are architectural decisions; record them as ADRs. |
 | `/arckit:risk` | SCA exemption misapplication maps to fraud-loss and regulatory-enforcement risk entries in the project risk register. |

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:adm-preliminary` creates the Architecture Vision artefact for a TOGAF ADM engagement. Use it to set scope, drivers, constraints, success criteria, stakeholders, and ADM phase boundaries before producing business, application, gap, transition, and governance artefacts.
+`/arckit-togaf-adm:adm-preliminary` creates the Architecture Vision artefact for a TOGAF ADM engagement. Use it to set scope, drivers, constraints, success criteria, stakeholders, and ADM phase boundaries before producing business, application, gap, transition, and governance artefacts.
 
 ---
 
@@ -20,7 +20,7 @@
 ## Command
 
 ```bash
-/arckit:adm-preliminary <project ID or transformation scope>
+/arckit-togaf-adm:adm-preliminary <project ID or transformation scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-ADMP-v1.0.md`
@@ -50,8 +50,8 @@ Output: `projects/<id>/ARC-<id>-ADMP-v1.0.md`
 | 1 | `/arckit:principles` | Establish global architecture guardrails |
 | 2 | `/arckit:stakeholders` | Capture business drivers and stakeholder goals |
 | 3 | `/arckit:strategy` | Set the strategic direction and investment frame |
-| 4 | `/arckit:adm-preliminary` | Define the ADM scope and Architecture Vision |
-| 5 | `/arckit:business-capability-map` | Translate the vision into business capabilities |
+| 4 | `/arckit-togaf-adm:adm-preliminary` | Define the ADM scope and Architecture Vision |
+| 5 | `/arckit-togaf-adm:business-capability-map` | Translate the vision into business capabilities |
 
 ---
 
@@ -67,6 +67,6 @@ Output: `projects/<id>/ARC-<id>-ADMP-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:business-capability-map` - Map capabilities within the ADM scope.
-- `/arckit:gap-analysis` - Compare current and target architecture states.
-- `/arckit:architecture-board` - Establish the governance body for implementation.
+- `/arckit-togaf-adm:business-capability-map` - Map capabilities within the ADM scope.
+- `/arckit-togaf-adm:gap-analysis` - Compare current and target architecture states.
+- `/arckit-togaf-adm:architecture-board` - Establish the governance body for implementation.

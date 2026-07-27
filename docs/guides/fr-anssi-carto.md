@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:fr-anssi-carto` produces an ANSSI-methodology information system cartography across four reading levels (business, application, system, network). Required for IS homologation and EBIOS RM studies.
+`/arckit-fr:fr-anssi-carto` produces an ANSSI-methodology information system cartography across four reading levels (business, application, system, network). Required for IS homologation and EBIOS RM studies.
 
 ---
 
@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-/arckit:fr-anssi-carto Produce IS cartography for <IS scope and organisation>
+/arckit-fr:fr-anssi-carto Produce IS cartography for <IS scope and organisation>
 ```
 
 Output: `projects/<id>/ARC-<id>-CARTO-v1.0.md`
@@ -43,9 +43,9 @@ Output: `projects/<id>/ARC-<id>-CARTO-v1.0.md`
 |-------|----------------|-----------------|
 | Discovery | IS scope and requirements | `/arckit:requirements` |
 | Data mapping | Data model | `/arckit:data-model` |
-| Cartography | 4-level IS mapping | `/arckit:fr-anssi-carto` |
-| Risk analysis | EBIOS RM (uses VM-xx IDs) | `/arckit:fr-ebios` |
-| Security policy | PSSI | `/arckit:fr-pssi` |
+| Cartography | 4-level IS mapping | `/arckit-fr:fr-anssi-carto` |
+| Risk analysis | EBIOS RM (uses VM-xx IDs) | `/arckit-fr:fr-ebios` |
+| Security policy | PSSI | `/arckit-fr:fr-pssi` |
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:fr-code-reuse` assesses public code reuse opportunities before building or procuring, following the legal obligation under Circulaire 2021-1524 (Prime Minister circular on free software and open source in public administration).
+`/arckit-fr:fr-code-reuse` assesses public code reuse opportunities before building or procuring, following the legal obligation under Circulaire 2021-1524 (Prime Minister circular on free software and open source in public administration).
 
 ---
 
@@ -18,7 +18,7 @@
 ## Command
 
 ```bash
-/arckit:fr-code-reuse Assess code reuse for <project scope and technology domain>
+/arckit-fr:fr-code-reuse Assess code reuse for <project scope and technology domain>
 ```
 
 Output: `projects/<id>/ARC-<id>-REUSE-v1.0.md`
@@ -60,8 +60,8 @@ Output: `projects/<id>/ARC-<id>-REUSE-v1.0.md`
 |-------|----------------|-----------------|
 | Discovery | Requirements and component needs | `/arckit:requirements` |
 | Research | Market and open source landscape | `/arckit:research` |
-| Reuse | Code reuse assessment | `/arckit:fr-code-reuse` |
-| Procurement | If procuring | `/arckit:fr-marche-public` |
+| Reuse | Code reuse assessment | `/arckit-fr:fr-code-reuse` |
+| Procurement | If procuring | `/arckit-fr:fr-marche-public` |
 
 ---
 

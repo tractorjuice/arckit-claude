@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-icam` generates an Identity, Credential, and Access Management (ICAM) architecture artefact for a federal civilian system, aligned to OMB M-19-17 and the GSA IDmanagement.gov ICAM reference. It documents identity sources, Identity Assurance Level / Authenticator Assurance Level / Federation Assurance Level (IAL/AAL/FAL) selections per NIST SP 800-63-3, federal employee/contractor PIV usage (FIPS 201-3), public-facing identity via login.gov, and the lifecycle for credential issuance, recovery, suspension, and revocation.
+`/arckit-us:us-icam` generates an Identity, Credential, and Access Management (ICAM) architecture artefact for a federal civilian system, aligned to OMB M-19-17 and the GSA IDmanagement.gov ICAM reference. It documents identity sources, Identity Assurance Level / Authenticator Assurance Level / Federation Assurance Level (IAL/AAL/FAL) selections per NIST SP 800-63-3, federal employee/contractor PIV usage (FIPS 201-3), public-facing identity via login.gov, and the lifecycle for credential issuance, recovery, suspension, and revocation.
 
 ICAM is the load-bearing layer for both **Zero Trust** (CISA ZTMM Identity pillar) and **FedRAMP** (AC/IA control families). Misaligned assurance levels are a top finding pattern: too high (IAL3 for low-risk identity) burns user goodwill and budget; too low (AAL1 for sensitive transactions) is a control gap that flows into the SSP and POA&M.
 
@@ -49,7 +49,7 @@ Reviewed by the ISSO, System Owner, the agency ICAM lead (where one exists), and
 ## Example Usage
 
 ```bash
-/arckit:us-icam 001-citizen-benefits-portal
+/arckit-us:us-icam 001-citizen-benefits-portal
 ```
 
 ---

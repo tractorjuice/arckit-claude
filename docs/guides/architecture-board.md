@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:architecture-board` establishes an Architecture Board charter for TOGAF ADM Phase G. It defines mandate, membership, decision rights, compliance scorecard, exception process, review cadence, and decision register.
+`/arckit-togaf-adm:architecture-board` establishes an Architecture Board charter for TOGAF ADM Phase G. It defines mandate, membership, decision rights, compliance scorecard, exception process, review cadence, and decision register.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:architecture-board <project ID or board scope>
+/arckit-togaf-adm:architecture-board <project ID or board scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-BORD-v1.0.md`
@@ -55,6 +55,6 @@ Output: `projects/<id>/ARC-<id>-BORD-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:architecture-change` - Create change requests for Board review.
-- `/arckit:transition-architecture` - Present migration plans for approval.
+- `/arckit-togaf-adm:architecture-change` - Create change requests for Board review.
+- `/arckit-togaf-adm:transition-architecture` - Present migration plans for approval.
 - `/arckit:principles-compliance` - Check artefacts against architecture principles.

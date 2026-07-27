@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:eu-data-act` generates an EU Data Act (Regulation EU 2023/2854) compliance assessment for connected product manufacturers, data holders, and data processing service providers (DAPS). Most obligations apply from **12 September 2025**.
+`/arckit-eu:eu-data-act` generates an EU Data Act (Regulation EU 2023/2854) compliance assessment for connected product manufacturers, data holders, and data processing service providers (DAPS). Most obligations apply from **12 September 2025**.
 
 ---
 
@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-/arckit:eu-data-act Assess Data Act compliance for <product/service and role>
+/arckit-eu:eu-data-act Assess Data Act compliance for <product/service and role>
 ```
 
 Output: `projects/<id>/ARC-<id>-DATAACT-v1.0.md`
@@ -58,8 +58,8 @@ Output: `projects/<id>/ARC-<id>-DATAACT-v1.0.md`
 |-------|----------------|-----------------|
 | Discovery | Product type and data flows | `/arckit:requirements`, `/arckit:data-model` |
 | Risk | Data sharing and trade secret risks | `/arckit:risk` |
-| Assessment | Data Act compliance assessment | `/arckit:eu-data-act` |
-| GDPR layer | Personal data in shared datasets | `/arckit:eu-rgpd` |
+| Assessment | Data Act compliance assessment | `/arckit-eu:eu-data-act` |
+| GDPR layer | Personal data in shared datasets | `/arckit-eu:eu-rgpd` |
 
 ---
 

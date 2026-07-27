@@ -1,6 +1,6 @@
 # NHS DCB0160 Deployer Clinical Safety Case Guide
 
-> **Command**: `/arckit:uk-nhs-dcb0160` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
+> **Command**: `/arckit-uk-nhs:uk-nhs-dcb0160` | **Overlay**: [UK NHS Clinical Safety Overlay](uk-nhs-clinical-safety-overlay.md) | **Origin**: Community-contributed
 
 ## Purpose
 
@@ -56,7 +56,7 @@ The deployment safety case is a legal obligation of the deploying NHS organisati
 
 ## Related commands
 
-- `/arckit:uk-nhs-dcb0129` — manufacturer-side companion (run first or attach external)
-- `/arckit:uk-nhs-dtac` — DTAC Section 1 may need the deployer case if the deploying NHS organisation is responsible for procurement assurance
+- `/arckit-uk-nhs:uk-nhs-dcb0129` — manufacturer-side companion (run first or attach external)
+- `/arckit-uk-nhs:uk-nhs-dtac` — DTAC Section 1 may need the deployer case if the deploying NHS organisation is responsible for procurement assurance
 - `/arckit:risk` — deployment-specific risks cross-reference the project risk register
 - `/arckit:operationalize` — runbooks, on-call, incident response feed the deployer hazard-mitigation plan

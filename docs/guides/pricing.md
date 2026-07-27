@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:pricing` generates the pricing document for a G-Cloud service. It aligns prices to the
+`/arckit-uk-gcloud:pricing` generates the pricing document for a G-Cloud service. It aligns prices to the
 service design, SDD, supplier evidence, and any market intelligence from tender or competitor
 artefacts.
 
@@ -11,7 +11,7 @@ artefacts.
 ## Command
 
 ```bash
-/arckit:pricing <service project or service name>
+/arckit-uk-gcloud:pricing <service project or service name>
 ```
 
 Output:
@@ -24,7 +24,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-PRIC-v1.0.md
 
 ## When to Use
 
-- After `/arckit:service-design` and the relevant SDD command.
+- After `/arckit-uk-gcloud:service-design` and the relevant SDD command.
 - Before submission review, so pricing can be checked against service features and support model.
 - When tiers, units, day rates, discounts, trials, or education pricing need to be explicit.
 - When tender or competitor evidence should inform the pricing rationale.
@@ -58,5 +58,5 @@ projects/<NNN>-<service-name>/ARC-<NNN>-PRIC-v1.0.md
 
 - `/arckit:tenders` - Procurement market benchmarks.
 - `/arckit:competitors` - Competitor award and positioning evidence.
-- `/arckit:gcloud-competitors` - Marketplace service comparison.
-- `/arckit:review` - Submission completeness and consistency check.
+- `/arckit-uk-gcloud:gcloud-competitors` - Marketplace service comparison.
+- `/arckit-uk-gcloud:review` - Submission completeness and consistency check.

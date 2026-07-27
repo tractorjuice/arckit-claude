@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-privacy-pia` produces a federal Privacy Impact Assessment under §208 of the E-Government Act of 2002 and OMB M-03-22. It scopes the personal information lifecycle, applies the Fair Information Practice Principles (FIPPs), captures the Privacy Act of 1974 system-of-records analysis (SORN trigger / coverage / amendment), aligns with NIST SP 800-122 PII handling guidance, and surfaces the AI-specific notice obligations introduced by OMB M-24-10.
+`/arckit-us:us-privacy-pia` produces a federal Privacy Impact Assessment under §208 of the E-Government Act of 2002 and OMB M-03-22. It scopes the personal information lifecycle, applies the Fair Information Practice Principles (FIPPs), captures the Privacy Act of 1974 system-of-records analysis (SORN trigger / coverage / amendment), aligns with NIST SP 800-122 PII handling guidance, and surfaces the AI-specific notice obligations introduced by OMB M-24-10.
 
 The PIA is **mandatory** when an agency develops or procures information technology that collects, maintains, or disseminates personally identifiable information, or when it initiates a new electronic collection of PII from 10 or more members of the public. It is the artefact that the agency SAOP signs and that is published for public consumption — a missing or incomplete PIA is a Senior Agency Official for Privacy finding.
 
@@ -53,7 +53,7 @@ Reviewed by the SAOP, the System Owner, the agency Privacy Office, General Couns
 ## Example Usage
 
 ```bash
-/arckit:us-privacy-pia 001-citizen-benefits-portal
+/arckit-us:us-privacy-pia 001-citizen-benefits-portal
 ```
 
 ---

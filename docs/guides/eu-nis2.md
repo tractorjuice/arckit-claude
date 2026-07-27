@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:eu-nis2` generates an NIS2 Directive (2022/2555) compliance assessment for entities in scope as essential or important operators in the EU, including French OIV/OSE obligations.
+`/arckit-eu:eu-nis2` generates an NIS2 Directive (2022/2555) compliance assessment for entities in scope as essential or important operators in the EU, including French OIV/OSE obligations.
 
 ---
 
@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-/arckit:eu-nis2 Assess NIS2 compliance for <entity and sector>
+/arckit-eu:eu-nis2 Assess NIS2 compliance for <entity and sector>
 ```
 
 Output: `projects/<id>/ARC-<id>-NIS2-v1.0.md`
@@ -58,8 +58,8 @@ Postal/courier services, waste management, chemicals, food, manufacturing, digit
 |-------|----------------|-----------------|
 | Discovery | Sector and entity classification | `/arckit:requirements` |
 | Risk | Cybersecurity risk assessment | `/arckit:risk` |
-| Assessment | NIS2 compliance assessment | `/arckit:eu-nis2` |
-| French layer | ANSSI hygiene measures | `/arckit:fr-anssi`, `/arckit:fr-ebios` |
+| Assessment | NIS2 compliance assessment | `/arckit-eu:eu-nis2` |
+| French layer | ANSSI hygiene measures | `/arckit-fr:fr-anssi`, `/arckit-fr:fr-ebios` |
 
 ---
 
@@ -78,5 +78,5 @@ Postal/courier services, waste management, chemicals, food, manufacturing, digit
 ## Key Notes
 
 - **France**: NIS2 transposed via LPM (Loi de Programmation Militaire). OIV obligations are stricter than NIS2 minimums.
-- **CRA overlap**: For product manufacturers, the CRA incident reporting obligations overlap with NIS2 — run `/arckit:eu-cra`.
-- **DORA overlap**: For financial entities, DORA replaces NIS2 for ICT risk — run `/arckit:eu-dora` instead.
+- **CRA overlap**: For product manufacturers, the CRA incident reporting obligations overlap with NIS2 — run `/arckit-eu:eu-cra`.
+- **DORA overlap**: For financial entities, DORA replaces NIS2 for ICT risk — run `/arckit-eu:eu-dora` instead.

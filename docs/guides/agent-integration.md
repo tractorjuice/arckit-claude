@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:agent-integration` creates an Agent Integration Architecture for multi-agent systems. It defines integration scope, inter-agent contracts, message protocol, shared state, failure isolation, observability, and traceability.
+`/arckit-agent-architecture:agent-integration` creates an Agent Integration Architecture for multi-agent systems. It defines integration scope, inter-agent contracts, message protocol, shared state, failure isolation, observability, and traceability.
 
 ---
 
@@ -21,7 +21,7 @@
 ## Command
 
 ```bash
-/arckit:agent-integration <project ID or agent group>
+/arckit-agent-architecture:agent-integration <project ID or agent group>
 ```
 
 Output: `projects/<id>/ARC-<id>-AAIN-v1.0.md`
@@ -54,6 +54,6 @@ Output: `projects/<id>/ARC-<id>-AAIN-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:agent-design` - Define individual agent architecture and interfaces.
-- `/arckit:agent-governance` - Apply oversight to multi-agent orchestration.
-- `/arckit:agent-security` - Secure inter-agent communication.
+- `/arckit-agent-architecture:agent-design` - Define individual agent architecture and interfaces.
+- `/arckit-agent-architecture:agent-governance` - Apply oversight to multi-agent orchestration.
+- `/arckit-agent-architecture:agent-security` - Secure inter-agent communication.

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:uae-digital-records` generates a Digital Records Plan under the UAE Government Services Digital Records Policy. Captures the source-of-truth register per service, retention schedule, records-as-official-source designation, and lifecycle / disposal procedures.
+`/arckit-uae:uae-digital-records` generates a Digital Records Plan under the UAE Government Services Digital Records Policy. Captures the source-of-truth register per service, retention schedule, records-as-official-source designation, and lifecycle / disposal procedures.
 
 ---
 
@@ -21,7 +21,7 @@
 ## Command
 
 ```bash
-/arckit:uae-digital-records <project ID or service name>
+/arckit-uae:uae-digital-records <project ID or service name>
 ```
 
 Output: `projects/<id>/ARC-<id>-DREC-v1.0.md`
@@ -46,9 +46,9 @@ Output: `projects/<id>/ARC-<id>-DREC-v1.0.md`
 | Phase | Key Activities | ArcKit Commands |
 |-------|----------------|-----------------|
 | Inventory | Records produced and consumed | `/arckit:requirements`, `/arckit:data-model` |
-| Records | Source-of-truth + retention | `/arckit:uae-digital-records` |
-| Sharing | Official-source feeds downstream shares | `/arckit:uae-data-sharing` |
-| Compliance | PDPL retention reconciliation | `/arckit:uae-pdpl` |
+| Records | Source-of-truth + retention | `/arckit-uae:uae-digital-records` |
+| Sharing | Official-source feeds downstream shares | `/arckit-uae:uae-data-sharing` |
+| Compliance | PDPL retention reconciliation | `/arckit-uae:uae-pdpl` |
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:architecture-repository` creates a reusable architecture knowledge store. It synthesises principles, ADRs, diagrams, lessons, standards, patterns, reference architectures, and building blocks across projects.
+`/arckit-togaf-adm:architecture-repository` creates a reusable architecture knowledge store. It synthesises principles, ADRs, diagrams, lessons, standards, patterns, reference architectures, and building blocks across projects.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:architecture-repository <optional project ID or global scope>
+/arckit-togaf-adm:architecture-repository <optional project ID or global scope>
 ```
 
 Output: `projects/<id>/ARC-<id>-REPO-v1.0.md`
@@ -57,6 +57,6 @@ For an enterprise-wide repository, use project `000` or the repository's chosen 
 
 ## Related Commands
 
-- `/arckit:adm-preliminary` - Reuse repository standards in new ADM cycles.
+- `/arckit-togaf-adm:adm-preliminary` - Reuse repository standards in new ADM cycles.
 - `/arckit:adr` - Feed decisions into the repository.
 - `/arckit:search` - Find reusable knowledge across project artefacts.

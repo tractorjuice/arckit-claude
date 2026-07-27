@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:declaration` generates the supplier declaration evidence pack for a UK G-Cloud framework
+`/arckit-uk-gcloud:declaration` generates the supplier declaration evidence pack for a UK G-Cloud framework
 submission. It uses the supplier profile as the baseline for company details, exclusions,
 insurance, modern slavery, tax, and related declarations.
 
@@ -11,7 +11,7 @@ insurance, modern slavery, tax, and related declarations.
 ## Command
 
 ```bash
-/arckit:declaration <supplier context>
+/arckit-uk-gcloud:declaration <supplier context>
 ```
 
 Output:
@@ -25,9 +25,9 @@ projects/000-global/supplier/ARC-000-DECL-v1.0.md
 ## When to Use
 
 - Before submitting or renewing a G-Cloud supplier declaration.
-- After creating or updating `/arckit:supplier-profile`.
+- After creating or updating `/arckit-uk-gcloud:supplier-profile`.
 - When insurance, exclusions, modern slavery, tax, or legal declarations need structured review.
-- Before `/arckit:submission-pack`, because the declaration is a required supplier-wide document.
+- Before `/arckit-uk-gcloud:submission-pack`, because the declaration is a required supplier-wide document.
 
 ---
 
@@ -54,6 +54,6 @@ projects/000-global/supplier/ARC-000-DECL-v1.0.md
 
 ## Related Commands
 
-- `/arckit:supplier-profile` - Supplier-wide source evidence.
-- `/arckit:review` - Validate the complete submission set.
-- `/arckit:submission-pack` - Bundle approved files for upload.
+- `/arckit-uk-gcloud:supplier-profile` - Supplier-wide source evidence.
+- `/arckit-uk-gcloud:review` - Validate the complete submission set.
+- `/arckit-uk-gcloud:submission-pack` - Bundle approved files for upload.

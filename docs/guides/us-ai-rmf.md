@@ -2,7 +2,7 @@
 
 > **Overlay**: USA Federal Civilian Community Overlay | **ArcKit Version**: [VERSION]
 
-`/arckit:us-ai-rmf` produces a NIST AI Risk Management Framework 1.0 assessment for an AI/ML system, scoring the four core functions (Govern, Map, Measure, Manage) and applying the AI RMF Playbook actions. Where generative AI is in scope, the assessment cross-references **NIST AI 600-1 (Generative AI Profile)** to add GenAI-specific risk categories (confabulation, data privacy leakage, harmful bias, value chain risk, dangerous content, IP infringement, etc.).
+`/arckit-us:us-ai-rmf` produces a NIST AI Risk Management Framework 1.0 assessment for an AI/ML system, scoring the four core functions (Govern, Map, Measure, Manage) and applying the AI RMF Playbook actions. Where generative AI is in scope, the assessment cross-references **NIST AI 600-1 (Generative AI Profile)** to add GenAI-specific risk categories (confabulation, data privacy leakage, harmful bias, value chain risk, dangerous content, IP infringement, etc.).
 
 This artefact is the **AI risk evidence base** that downstream artefacts (`us-ai-impact`, vendor evaluations, ATO packages) cite. It is voluntary at federal level but functionally required: the M-24-10 / M-25-21 chain expects agencies to demonstrate AI risk management, and the AI RMF is the agreed framework.
 
@@ -48,7 +48,7 @@ Reviewed by the agency Chief AI Officer (CAIO), Senior AI Official (SAO), Senior
 ## Example Usage
 
 ```bash
-/arckit:us-ai-rmf 001-claims-triage-llm
+/arckit-us:us-ai-rmf 001-claims-triage-llm
 ```
 
 ---

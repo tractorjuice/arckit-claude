@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:review` checks a G-Cloud service submission for completeness and internal consistency
+`/arckit-uk-gcloud:review` checks a G-Cloud service submission for completeness and internal consistency
 before CCS submission. It validates the supplier profile, declaration, service design, SDD,
 pricing, and security evidence as a joined submission set.
 
@@ -11,7 +11,7 @@ pricing, and security evidence as a joined submission set.
 ## Command
 
 ```bash
-/arckit:review <service project or service name>
+/arckit-uk-gcloud:review <service project or service name>
 ```
 
 Output:
@@ -25,7 +25,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-GCRV-v1.0.md
 ## When to Use
 
 - After supplier-wide and service-specific documents are drafted.
-- Before `/arckit:submission-pack`.
+- Before `/arckit-uk-gcloud:submission-pack`.
 - When there are multiple revisions and you need a single readiness view.
 - Before copying answers into the Digital Marketplace submission form.
 
@@ -35,12 +35,12 @@ projects/<NNN>-<service-name>/ARC-<NNN>-GCRV-v1.0.md
 
 | Artefact | Command |
 |----------|---------|
-| `ARC-000-SUPP` | `/arckit:supplier-profile` |
-| `ARC-000-DECL` | `/arckit:declaration` |
-| `ARC-<NNN>-SVCD` | `/arckit:service-design` |
-| `ARC-<NNN>-SDD` | `/arckit:sdd-lot1`, `/arckit:sdd-lot2`, or `/arckit:sdd-lot3` |
-| `ARC-<NNN>-PRIC` | `/arckit:pricing` |
-| `ARC-<NNN>-SECA` | `/arckit:security` |
+| `ARC-000-SUPP` | `/arckit-uk-gcloud:supplier-profile` |
+| `ARC-000-DECL` | `/arckit-uk-gcloud:declaration` |
+| `ARC-<NNN>-SVCD` | `/arckit-uk-gcloud:service-design` |
+| `ARC-<NNN>-SDD` | `/arckit-uk-gcloud:sdd-lot1`, `/arckit-uk-gcloud:sdd-lot2`, or `/arckit-uk-gcloud:sdd-lot3` |
+| `ARC-<NNN>-PRIC` | `/arckit-uk-gcloud:pricing` |
+| `ARC-<NNN>-SECA` | `/arckit-uk-gcloud:security` |
 
 ---
 
@@ -56,6 +56,6 @@ projects/<NNN>-<service-name>/ARC-<NNN>-GCRV-v1.0.md
 
 ## Related Commands
 
-- `/arckit:gcloud-competitors` - Run benchmark analysis before final review.
-- `/arckit:submission-pack` - Bundle approved artefacts after review.
+- `/arckit-uk-gcloud:gcloud-competitors` - Run benchmark analysis before final review.
+- `/arckit-uk-gcloud:submission-pack` - Bundle approved artefacts after review.
 - `/arckit:risk` - Track material submission or delivery risks.

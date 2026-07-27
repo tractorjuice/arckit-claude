@@ -1,4 +1,4 @@
-# Consumer Duty Annual Board Report (`/arckit:uk-fs-consumer-duty`)
+# Consumer Duty Annual Board Report (`/arckit-uk-finance:uk-fs-consumer-duty`)
 
 > **Status**: EXPERIMENTAL · Community-contributed · **Output is not regulatory advice.**
 > The Consumer Duty Board Report MUST be reviewed, materially supplemented, and signed off by
@@ -10,7 +10,7 @@
 
 ## Purpose
 
-The `/arckit:uk-fs-consumer-duty` command generates an FCA Consumer Duty Annual Board Report for
+The `/arckit-uk-finance:uk-fs-consumer-duty` command generates an FCA Consumer Duty Annual Board Report for
 an authorised UK Payment Service Provider (PSP), Electronic Money Institution (EMI), or Payment
 Institution (PI) with retail customers. The report covers the four Consumer Duty outcomes introduced
 by FCA PS22/9 (in force 31 July 2023 for open products / 31 July 2024 for closed products) and
@@ -50,7 +50,7 @@ statements.
 Pass the project ID and product context as `$ARGUMENTS`:
 
 ```text
-/arckit:uk-fs-consumer-duty 003 retail FX cross-border payments
+/arckit-uk-finance:uk-fs-consumer-duty 003 retail FX cross-border payments
 ```
 
 The argument should include:
@@ -136,8 +136,8 @@ PRIN 2A) for a stable legislative anchor.
 | `/arckit:stakeholders` | Target market assessment (Outcome 1) maps directly to the stakeholder Goals section — use the STKE artefact as the primary input. |
 | `/arckit:dpia` | Price-personalisation (dynamic FX rates, tiered fees) or vulnerable-customer scoring using proxy indicators involves profiling under UK GDPR — a DPIA is required. |
 | `/arckit:risk` | Foreseeable harms in the Consumer Duty report map to Orange Book risk entries. Cross-reference HARM-NNN identifiers to RISK artefact entries for traceability. |
-| `/arckit:uk-fs-sca-rts` | SCA biometric and device-fingerprinting design intersects with the Consumer Understanding outcome for customers with accessibility needs or characteristics of vulnerability. |
-| `/arckit:uk-fs-safeguarding` | EMI and PI redemption accessibility under the Consumer Support outcome intersects with safeguarding obligations — customers must be able to redeem funds promptly. |
+| `/arckit-uk-finance:uk-fs-sca-rts` | SCA biometric and device-fingerprinting design intersects with the Consumer Understanding outcome for customers with accessibility needs or characteristics of vulnerability. |
+| `/arckit-uk-finance:uk-fs-safeguarding` | EMI and PI redemption accessibility under the Consumer Support outcome intersects with safeguarding obligations — customers must be able to redeem funds promptly. |
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:uae-priorities-alignment` generates a National Priorities Alignment Statement under the UAE Federal Government Guide to Aligning Digital Government Projects with National Priorities. Captures reuse-vs-build justification, capability-reuse register (UAE Pass, FedNet, etc.), and strategy alignment to NIS 2031 / AI 2031 / Digital Economy Strategy / We the UAE 2031.
+`/arckit-uae:uae-priorities-alignment` generates a National Priorities Alignment Statement under the UAE Federal Government Guide to Aligning Digital Government Projects with National Priorities. Captures reuse-vs-build justification, capability-reuse register (UAE Pass, FedNet, etc.), and strategy alignment to NIS 2031 / AI 2031 / Digital Economy Strategy / We the UAE 2031.
 
 ---
 
@@ -20,7 +20,7 @@
 ## Command
 
 ```bash
-/arckit:uae-priorities-alignment <project ID or service name>
+/arckit-uae:uae-priorities-alignment <project ID or service name>
 ```
 
 Output: `projects/<id>/ARC-<id>-NPRA-v1.0.md`
@@ -56,10 +56,10 @@ Output: `projects/<id>/ARC-<id>-NPRA-v1.0.md`
 
 | Phase | Key Activities | ArcKit Commands |
 |-------|----------------|-----------------|
-| Foundations | Compliance and design baseline | `/arckit:uae-pdpl`, `/arckit:uae-classification`, `/arckit:uae-ias` |
-| Alignment | National-priorities statement | `/arckit:uae-priorities-alignment` |
+| Foundations | Compliance and design baseline | `/arckit-uae:uae-pdpl`, `/arckit-uae:uae-classification`, `/arckit-uae:uae-ias` |
+| Alignment | National-priorities statement | `/arckit-uae:uae-priorities-alignment` |
 | Business case | Reuse + alignment into SOBC | `/arckit:sobc` |
-| Reuse design | Detail UAE Pass integration | `/arckit:uae-uaepass` |
+| Reuse design | Detail UAE Pass integration | `/arckit-uae:uae-uaepass` |
 
 ---
 

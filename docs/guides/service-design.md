@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:service-design` creates a per-service design document for a UK G-Cloud Digital Marketplace
+`/arckit-uk-gcloud:service-design` creates a per-service design document for a UK G-Cloud Digital Marketplace
 offering. In the G-Cloud supplier overlay, each service is its own ArcKit project under
 `projects/<NNN>-<service-name>/`.
 
@@ -11,7 +11,7 @@ offering. In the G-Cloud supplier overlay, each service is its own ArcKit projec
 ## Command
 
 ```bash
-/arckit:service-design <service name, lot, and context>
+/arckit-uk-gcloud:service-design <service name, lot, and context>
 ```
 
 Output:
@@ -44,11 +44,11 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SVCD-v1.0.md
 
 ## Workflow
 
-1. Run `/arckit:supplier-profile` first when supplier-wide evidence is not yet captured.
-2. Run `/arckit:service-design` for the service name and target lot.
+1. Run `/arckit-uk-gcloud:supplier-profile` first when supplier-wide evidence is not yet captured.
+2. Run `/arckit-uk-gcloud:service-design` for the service name and target lot.
 3. Review the generated `SVCD` document for marketplace limits and claim accuracy.
-4. Generate the relevant SDD with `/arckit:sdd-lot1`, `/arckit:sdd-lot2`, or
-   `/arckit:sdd-lot3`.
+4. Generate the relevant SDD with `/arckit-uk-gcloud:sdd-lot1`, `/arckit-uk-gcloud:sdd-lot2`, or
+   `/arckit-uk-gcloud:sdd-lot3`.
 5. Generate pricing and security evidence, then review the submission.
 
 ---
@@ -65,7 +65,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SVCD-v1.0.md
 
 ## Related Commands
 
-- `/arckit:sdd-lot1` - Draft a Lot 1 Service Definition Document.
-- `/arckit:sdd-lot2` - Draft a Lot 2 Service Definition Document.
-- `/arckit:sdd-lot3` - Draft a Lot 3 Service Definition Document.
-- `/arckit:pricing` - Generate the pricing document.
+- `/arckit-uk-gcloud:sdd-lot1` - Draft a Lot 1 Service Definition Document.
+- `/arckit-uk-gcloud:sdd-lot2` - Draft a Lot 2 Service Definition Document.
+- `/arckit-uk-gcloud:sdd-lot3` - Draft a Lot 3 Service Definition Document.
+- `/arckit-uk-gcloud:pricing` - Generate the pricing document.

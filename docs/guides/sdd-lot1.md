@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:sdd-lot1` generates the Service Definition Document for a G-Cloud Lot 1 cloud hosting
+`/arckit-uk-gcloud:sdd-lot1` generates the Service Definition Document for a G-Cloud Lot 1 cloud hosting
 service. Lot 1 covers IaaS and PaaS capabilities such as compute, storage, networking,
 containers, platform services, and hosting environments.
 
@@ -11,7 +11,7 @@ containers, platform services, and hosting environments.
 ## Command
 
 ```bash
-/arckit:sdd-lot1 <service project or service name>
+/arckit-uk-gcloud:sdd-lot1 <service project or service name>
 ```
 
 Output:
@@ -25,7 +25,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SDD-v1.0.md
 ## When to Use
 
 - The service is primarily cloud hosting, infrastructure, platform, container, or managed hosting.
-- You have already created a service design with `/arckit:service-design`.
+- You have already created a service design with `/arckit-uk-gcloud:service-design`.
 - You need a buyer-facing SDD that can be copied into Digital Marketplace fields.
 
 ---
@@ -55,7 +55,7 @@ projects/<NNN>-<service-name>/ARC-<NNN>-SDD-v1.0.md
 
 ## Related Commands
 
-- `/arckit:service-design` - Create the service design input.
-- `/arckit:pricing` - Align pricing with hosting tiers.
-- `/arckit:security` - Generate NCSC Cloud Security Principles evidence.
-- `/arckit:review` - Check the submission pack before CCS upload.
+- `/arckit-uk-gcloud:service-design` - Create the service design input.
+- `/arckit-uk-gcloud:pricing` - Align pricing with hosting tiers.
+- `/arckit-uk-gcloud:security` - Generate NCSC Cloud Security Principles evidence.
+- `/arckit-uk-gcloud:review` - Check the submission pack before CCS upload.

@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:eu-dsa` generates a DSA (Regulation EU 2022/2065) compliance assessment for online intermediary services operating in the EU. The DSA has applied in full since **17 February 2024**.
+`/arckit-eu:eu-dsa` generates a DSA (Regulation EU 2022/2065) compliance assessment for online intermediary services operating in the EU. The DSA has applied in full since **17 February 2024**.
 
 ---
 
@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-/arckit:eu-dsa Assess DSA compliance for <service description and monthly EU user count>
+/arckit-eu:eu-dsa Assess DSA compliance for <service description and monthly EU user count>
 ```
 
 Output: `projects/<id>/ARC-<id>-DSA-v1.0.md`
@@ -58,9 +58,9 @@ Output: `projects/<id>/ARC-<id>-DSA-v1.0.md`
 |-------|----------------|-----------------|
 | Discovery | Service and user scale | `/arckit:requirements` |
 | Risk | Content and platform risk | `/arckit:risk` |
-| Assessment | DSA compliance assessment | `/arckit:eu-dsa` |
-| AI layer | If AI-driven recommender/moderation | `/arckit:eu-ai-act` |
-| GDPR layer | Personal data in ads/recommender | `/arckit:eu-rgpd` |
+| Assessment | DSA compliance assessment | `/arckit-eu:eu-dsa` |
+| AI layer | If AI-driven recommender/moderation | `/arckit-eu:eu-ai-act` |
+| GDPR layer | Personal data in ads/recommender | `/arckit-eu:eu-rgpd` |
 
 ---
 

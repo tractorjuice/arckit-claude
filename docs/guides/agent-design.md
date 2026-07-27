@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:agent-design` creates an Agent Architecture Specification. It documents agent pattern, tool contracts, memory architecture, orchestration, guardrails, testing strategy, and traceability back to requirements, risks, stakeholders, and inventory.
+`/arckit-agent-architecture:agent-design` creates an Agent Architecture Specification. It documents agent pattern, tool contracts, memory architecture, orchestration, guardrails, testing strategy, and traceability back to requirements, risks, stakeholders, and inventory.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:agent-design <agent name or project ID>
+/arckit-agent-architecture:agent-design <agent name or project ID>
 ```
 
 Output: `projects/<id>/ARC-<id>-AAGR-v1.0.md`
@@ -66,6 +66,6 @@ Output: `projects/<id>/ARC-<id>-AAGR-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:agent-integration` - Design multi-agent contracts and shared state.
-- `/arckit:agent-security` - Add sandboxing, permission, and validation controls.
-- `/arckit:agent-governance` - Define oversight and approvals.
+- `/arckit-agent-architecture:agent-integration` - Design multi-agent contracts and shared state.
+- `/arckit-agent-architecture:agent-security` - Add sandboxing, permission, and validation controls.
+- `/arckit-agent-architecture:agent-governance` - Define oversight and approvals.

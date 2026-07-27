@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:submission-pack` bundles all approved documents for a G-Cloud service into a submission
+`/arckit-uk-gcloud:submission-pack` bundles all approved documents for a G-Cloud service into a submission
 folder and writes a manifest. It is an export action: it copies existing artefacts and does not
 create a new ArcKit document type.
 
@@ -11,7 +11,7 @@ create a new ArcKit document type.
 ## Command
 
 ```bash
-/arckit:submission-pack <service project or service name>
+/arckit-uk-gcloud:submission-pack <service project or service name>
 ```
 
 Output:
@@ -25,7 +25,7 @@ projects/<NNN>-<service-name>/submission/manifest.md
 
 ## When to Use
 
-- After `/arckit:review` shows the service is ready or close to ready.
+- After `/arckit-uk-gcloud:review` shows the service is ready or close to ready.
 - When supplier-wide and per-service documents need to be assembled for CCS upload.
 - When evidence files, pricing, SDD, security, supplier profile, and declaration need one manifest.
 
@@ -35,12 +35,12 @@ projects/<NNN>-<service-name>/submission/manifest.md
 
 | Artefact | Source command |
 |----------|----------------|
-| `ARC-000-SUPP` | `/arckit:supplier-profile` |
-| `ARC-000-DECL` | `/arckit:declaration` |
-| `ARC-<NNN>-SVCD` | `/arckit:service-design` |
-| `ARC-<NNN>-SDD` | `/arckit:sdd-lot1`, `/arckit:sdd-lot2`, or `/arckit:sdd-lot3` |
-| `ARC-<NNN>-PRIC` | `/arckit:pricing` |
-| `ARC-<NNN>-SECA` | `/arckit:security` |
+| `ARC-000-SUPP` | `/arckit-uk-gcloud:supplier-profile` |
+| `ARC-000-DECL` | `/arckit-uk-gcloud:declaration` |
+| `ARC-<NNN>-SVCD` | `/arckit-uk-gcloud:service-design` |
+| `ARC-<NNN>-SDD` | `/arckit-uk-gcloud:sdd-lot1`, `/arckit-uk-gcloud:sdd-lot2`, or `/arckit-uk-gcloud:sdd-lot3` |
+| `ARC-<NNN>-PRIC` | `/arckit-uk-gcloud:pricing` |
+| `ARC-<NNN>-SECA` | `/arckit-uk-gcloud:security` |
 
 ---
 
@@ -58,7 +58,7 @@ The generated `submission/manifest.md` should include:
 
 ## Guardrails
 
-- Do not create a service project here; run `/arckit:service-design` first.
+- Do not create a service project here; run `/arckit-uk-gcloud:service-design` first.
 - Do not rewrite approved source documents while assembling the pack.
 - Treat the pack as an internal aid, not a guarantee of CCS acceptance.
 - Confirm live framework deadlines and upload requirements before submission.
@@ -67,6 +67,6 @@ The generated `submission/manifest.md` should include:
 
 ## Related Commands
 
-- `/arckit:review` - Readiness check before packing.
-- `/arckit:declaration` - Supplier-wide declaration input.
-- `/arckit:security` - Security evidence input.
+- `/arckit-uk-gcloud:review` - Readiness check before packing.
+- `/arckit-uk-gcloud:declaration` - Supplier-wide declaration input.
+- `/arckit-uk-gcloud:security` - Security evidence input.

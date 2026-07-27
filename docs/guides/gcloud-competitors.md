@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:gcloud-competitors` benchmarks a supplier-side G-Cloud service against comparable Digital
+`/arckit-uk-gcloud:gcloud-competitors` benchmarks a supplier-side G-Cloud service against comparable Digital
 Marketplace rivals. It uses the service design, SDD, pricing, and optional market intelligence to
 produce positioning, differentiation, and improvement evidence.
 
@@ -11,7 +11,7 @@ produce positioning, differentiation, and improvement evidence.
 ## Command
 
 ```bash
-/arckit:gcloud-competitors <service project or service name>
+/arckit-uk-gcloud:gcloud-competitors <service project or service name>
 ```
 
 Output:
@@ -58,4 +58,4 @@ projects/<NNN>-<service-name>/ARC-<NNN>-GCMP-v1.0.md
 
 - `/arckit:tenders` - Procurement market intelligence.
 - `/arckit:competitors` - Supplier landscape intelligence.
-- `/arckit:review` - Check readiness after benchmark-driven updates.
+- `/arckit-uk-gcloud:review` - Check readiness after benchmark-driven updates.

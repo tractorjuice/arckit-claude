@@ -2,7 +2,7 @@
 
 > **Guide Origin**: Community | **ArcKit Version**: [VERSION]
 
-`/arckit:agent-inventory` creates a governed catalogue of AI agents across a project, programme, or organisation. It records agent purpose, capabilities, ownership, lifecycle, dependencies, security classification, and human oversight level.
+`/arckit-agent-architecture:agent-inventory` creates a governed catalogue of AI agents across a project, programme, or organisation. It records agent purpose, capabilities, ownership, lifecycle, dependencies, security classification, and human oversight level.
 
 ---
 
@@ -22,7 +22,7 @@
 ## Command
 
 ```bash
-/arckit:agent-inventory <project ID, organisation scope, or environment>
+/arckit-agent-architecture:agent-inventory <project ID, organisation scope, or environment>
 ```
 
 Output: `projects/<id>/ARC-<id>-AAGI-v1.0.md`
@@ -55,6 +55,6 @@ Output: `projects/<id>/ARC-<id>-AAGI-v1.0.md`
 
 ## Related Commands
 
-- `/arckit:agent-design` - Design new or modified agents.
-- `/arckit:agent-governance` - Define oversight and approval workflows.
-- `/arckit:agent-security` - Assess and design agent security controls.
+- `/arckit-agent-architecture:agent-design` - Design new or modified agents.
+- `/arckit-agent-architecture:agent-governance` - Define oversight and approval workflows.
+- `/arckit-agent-architecture:agent-security` - Assess and design agent security controls.
