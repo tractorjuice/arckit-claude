@@ -5,6 +5,20 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] — 2026-07-27
+
+### Added
+
+- **Kimi Code CLI hooks.** The `arckit-kimi` plugin manifest now wires 16 governance and security hooks (session context injection, prompt and file secret detection, file protection, ARC filename validation, score and Wardley-math validation, provenance stamping, manifest updates, stale-artifact notices, session learner, post-compact rehydrate, and telemetry) through a new `hooks/kimi-hook-adapter.mjs`. The adapter runs each unmodified Claude hook as a child and re-expresses its Claude-shaped output in Kimi's contract (context to stdout on exit 0, blocks to exit 2), so the battle-tested Claude hooks stay byte-for-byte unchanged. Path-scoped hooks carry an adapter-level guard that stands in for Claude's `if:` conditions, which Kimi's flat hook schema cannot express. The translation logic is unit-tested in isolation; the end-to-end wiring is not yet smoke-tested against a live Kimi runtime.
+- **Kimi manifest metadata.** `kimi.plugin.json` now carries `author`, `homepage`, `repository`, `license`, `keywords`, and a fuller `interface` block (`longDescription`, `developerName`, `websiteURL`) for the `/plugins` browser.
+
+### Fixed
+
+- **Build Provenance model-id parsing** (#664). `extractModelFromContent` rejected model ids containing a provider prefix or a bracketed context-window suffix (e.g. `claude-opus-4-8[1m]`, bedrock-style `us.anthropic.claude-*`), silently dropping the model from the stamp. Widened the id character class and extracted the pure model/effort helpers into a testable `provenance-model.mjs`.
+- Softened the converter's `generate_kimi_plugin_json` note that asserted Kimi supports `headers` on remote MCP servers. Kimi's published schema documents only `url`, so the two keyed servers (`google-developer-knowledge`, `datacommons-mcp`) may not authenticate under Kimi until confirmed on a live instance.
+- **Build Provenance effort matrix corrected** (#669). The effort helper ranked `xhigh` above `max`, inverting the official Claude Code ordering (`max` is the deepest tier), and used a single per-model cap that could not represent Opus 4.6 / Sonnet 4.6, which support `max` but not `xhigh`. The stamp therefore recorded the wrong "Effective Effort" for those models: `xhigh` was reported as downgraded to `max`, where the harness actually falls back to `high`. Replaced the single cap with per-model supported sets, fixed the level ordering, and dropped the incorrect Haiku 4.5 entry (Haiku does not support effort). Verified against the official model-config docs (`code.claude.com/docs`).
+- Corrected a non-existent `moonshotai/kimi-v3` example id to `kimi-k3` in the provenance model helper (#670).
+
 ## [6.4.0] — 2026-07-25
 
 ### Added
