@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a Critical Third Parties (CTP) dependency assessment — register of designated CTPs the firm relies on (cloud hyperscalers, payment networks, BaaS providers), materiality assessment per provider, resilience testing plan including exit and substitution drills (BoE/PRA/FCA PS24/16)."
+doc-type: FSCTP
 argument-hint: "<project ID or product context, e.g. '004', 'core payments platform'>"
 effort: high
 keep-coding-instructions: true
@@ -58,7 +59,7 @@ instead of recreating it. Extract `project_dir` and `project_number` from the JS
 Run:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh <PROJECT_NUMBER> FSCTP --filename
+${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSCTP --filename
 ```
 
 This produces a filename of the form `ARC-NNN-FSCTP-v1.0.md`. FSCTP is the doc-type code for this

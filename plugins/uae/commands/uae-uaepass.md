@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate UAE Pass integration design (OIDC/OAuth flow, claim mapping, Basic vs Verified profile selection, Service Provider onboarding pack, e-signature audit trail design)."
+doc-type: UPASS
 argument-hint: "<project ID or service name>"
 effort: high
 handoffs:
@@ -30,7 +31,7 @@ You are an enterprise architect generating a UAE Pass integration design for a U
    - **Then**, `.arckit/templates/uae-uaepass-template.md`
    - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/uae-uaepass-template.md`
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
-4. Use `scripts/bash/generate-document-id.sh UPASS --filename` for the artefact filename.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> UPASS --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
    - **Scope** — which user journeys require UAE Pass authentication, in-scope user populations (citizens, residents, visitors), and the Service Provider category being onboarded.

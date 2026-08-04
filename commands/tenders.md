@@ -1,5 +1,6 @@
 ---
 description: Procurement market intelligence — award-value benchmarks, top suppliers, incumbency and concentration, from the UK Tenders MCP
+doc-type: TNDR
 argument-hint: "[project-number-or-name] <capability | --cpv NNNNNNNN | --buyer 'Name' | --supplier 'Name'>"
 tags: [procurement, tenders, market-intelligence, incumbency, build-vs-buy, uk-gov]
 effort: high
@@ -255,7 +256,7 @@ to the project's `research/` directory. Run the bundled helper (it is
 positional-then-flags):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {P} TNDR --next-num "{project_path}/research"
 ```
 
@@ -356,7 +357,7 @@ Return ONLY a concise summary to the user:
 
 - **Template** — `${CLAUDE_PLUGIN_ROOT}/templates/tenders-template.md` (read by writer)
 - **Schema** — `${CLAUDE_PLUGIN_ROOT}/schemas/tenders-handoff.schema.json`
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/validate-handoff.mjs` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/validate-handoff.mjs` · `${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs`
 - **Subagents dispatched** — `arckit-tenders-reader` (fetch + extract) · `arckit-tenders-writer` (final render)
 - **External tools** — none directly (delegated to reader)
 - **Related commands** — `/arckit:sobc` (downstream Economic Case) · `/arckit:risk` (downstream concentration risk) · `/arckit:research` (build-vs-buy context)

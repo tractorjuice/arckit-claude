@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a Privacy Impact Assessment under E-Government Act §208 and OMB M-03-22 for a US federal civilian system handling PII, including Privacy Act §552a alignment and SORN trigger check."
+doc-type: USPIA
 argument-hint: "<project ID or system, e.g. '001', 'Agency Citizen Services Portal'>"
 effort: high
 handoffs:
@@ -64,7 +65,7 @@ This US PIA is distinct from the Canadian PIA (`/arckit-ca:ca-pia`), Australian 
 
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
 
-4. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> USPIA --filename` for the artefact filename. The type code for this command is `USPIA` (US-prefixed to avoid collision with the Canadian `PIA` doc type).
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> USPIA --filename` for the artefact filename. The type code for this command is `USPIA` (US-prefixed to avoid collision with the Canadian `PIA` doc type).
 
 5. Generate the following sections:
 
@@ -80,7 +81,7 @@ This US PIA is distinct from the Canadian PIA (`/arckit-ca:ca-pia`), Australian 
    - **Privacy Risk Register and Mitigations** — risks scored by likelihood and impact, with mitigations and residual risk; cross-reference the project risk register.
    - **SAOP Sign-Off Block** — agency SAOP reviewer, date, scope of approval, publication URL (post-redaction), and re-assessment cadence.
 
-6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.sh`.
+6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.mjs`.
 
 7. Emit a short summary to the user — PII element count, SORN verdict, M-03-22 checklist satisfaction, top three privacy risks, SAOP review status, and intended publication date. Do not echo the full artefact.
 

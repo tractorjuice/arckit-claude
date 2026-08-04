@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate an Australian energy-sector compliance architecture pack covering AER ring-fencing, AEMC NER/NGR, AEMO interfaces, and SOCI escalation evidence."
+doc-type: AUENERGY
 argument-hint: "<project ID or system, e.g. '001', 'Retailer DER Platform'>"
 effort: high
 handoffs:
@@ -72,7 +73,7 @@ Australian energy projects may need architecture evidence for **AER ring-fencing
 
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist.
 
-4. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> AUENERGY --filename` for the artefact filename.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUENERGY --filename` for the artefact filename.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Australian classification scheme (UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET) -- replace the standard UK line in the header.
 

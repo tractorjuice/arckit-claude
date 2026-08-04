@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a UK PSD2 SCA-RTS exemption design document — exemption applicability matrix, transaction risk analysis (TRA) thresholds, fraud monitoring framework, and per-exemption decision rationale."
+doc-type: FSSCA
 argument-hint: "<project ID or product context, e.g. '001', 'card-not-present checkout flow'>"
 effort: high
 keep-coding-instructions: true
@@ -50,7 +51,7 @@ instead of recreating it. Extract `project_dir` and `project_number` from the JS
 Run:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh <PROJECT_NUMBER> FSSCA --filename
+${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSSCA --filename
 ```
 
 This produces a filename of the form `ARC-NNN-FSSCA-v1.0.md`. FSSCA is the doc-type code for this

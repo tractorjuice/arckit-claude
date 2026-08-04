@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a Canada Security of Information Act handling plan — Special Operational Information (SOI) register, marking and handling matrix, transmission channels, compartments and need-to-know, destruction and sanitisation, CSIS Act §16 and §19 coordination, RCMP NSP liaison, breach response, personnel reliability prerequisites."
+doc-type: SOIA
 argument-hint: "<project ID or service name>"
 effort: high
 keep-coding-instructions: true
@@ -42,7 +43,7 @@ You are an enterprise architect generating a Canada Security of Information Act 
    - **First**, check `.arckit/templates-custom/ca-soia-template.md` (user override)
    - **Then**, `.arckit/templates/ca-soia-template.md`
    - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/ca-soia-template.md`
-3. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> SOIA --filename` for the artefact filename.
+3. Use `node scripts/generate-document-id.mjs <PROJECT_ID> SOIA --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Canadian classification scheme (UNCLASSIFIED / Protected A / Protected B / Protected C / CONFIDENTIAL / SECRET / TOP SECRET) — replace the standard UK line in the header. Note that the artefact itself will frequently warrant a SECRET or higher classification.
 5. Generate the following sections (the template provides skeletons for each):
    - **SOI Inventory** — every dataset, document, or artefact that meets the *Security of Information Act* s.8 definition of *Special Operational Information*. Include intelligence reporting, source-protective material, foreign-government-shared product, methods and techniques, and identities subject to s.8. SOI is a statutory category — material qualifies by meeting the s.8 definition, and departmental designation cannot create or remove SOI status.

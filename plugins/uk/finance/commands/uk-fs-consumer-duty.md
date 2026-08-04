@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate an FCA Consumer Duty annual Board Report — customer outcomes evidence pack across the four outcomes (Products & Services, Price & Value, Consumer Understanding, Consumer Support), price & value assessment, target market assessment, fair-value framework."
+doc-type: FSCD
 argument-hint: "<project ID or product context, e.g. '003', 'retail FX cross-border payments'>"
 effort: high
 keep-coding-instructions: true
@@ -57,7 +58,7 @@ instead of recreating it. Extract `project_dir` and `project_number` from the JS
 Run:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh <PROJECT_NUMBER> FSCD --filename
+${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSCD --filename
 ```
 
 This produces a filename of the form `ARC-NNN-FSCD-v1.0.md`. FSCD is the doc-type code for this

@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a federal procurement strategy under UAE Federal Decree-Law 11/2023. Produces ITT/RFP packs against the MoF Digital Procurement Platform templates, In-Country Value (ICV) plan, evaluation report structure, and contract register."
+doc-type: FPRO
 argument-hint: "<project ID or procurement scope>"
 effort: high
 handoffs:
@@ -30,7 +31,7 @@ You are an enterprise architect generating a federal procurement strategy under 
    - **Then**, `.arckit/templates/uae-procurement-template.md`
    - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/uae-procurement-template.md`
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
-4. Use `scripts/bash/generate-document-id.sh FPRO --filename` for the artefact filename.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> FPRO --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
    - **Procurement Strategy** — scope, value bracket, route to market (open / restricted / direct award), use of framework agreements, justification for the chosen route under the Decree-Law, indicative timeline, and risks.

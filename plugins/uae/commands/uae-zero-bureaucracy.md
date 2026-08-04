@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a Service Catalogue review under the UAE Code for Government Services and Zero Bureaucracy. Captures service catalogue mapping, bureaucracy-elimination baseline, and customer-experience KPIs."
+doc-type: ZBUR
 argument-hint: "<project ID or service name>"
 effort: high
 keep-coding-instructions: true
@@ -29,7 +30,7 @@ You are an enterprise architect generating a Service Catalogue Review under the 
    - **Then**, `.arckit/templates/uae-zero-bureaucracy-template.md`
    - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/uae-zero-bureaucracy-template.md`
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
-4. Use `scripts/bash/generate-document-id.sh ZBUR --filename` for the artefact filename.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> ZBUR --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
    - **Service Catalogue Mapping** — every service this project delivers, with the federal entity service catalogue ID (where the entity already publishes one), the customer journey it sits on, and its current Zero Bureaucracy status.

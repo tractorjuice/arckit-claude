@@ -1,5 +1,6 @@
 ---
 description: Generate the Service Definition Document for Lot 3 (Cloud Support)
+doc-type: SDD
 effort: max
 handoffs:
   - command: /arckit-uk-gcloud:pricing
@@ -151,7 +152,7 @@ unsure.
 with the ArcKit helper (no `--next-num` — SDD is not multi-instance):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {PROJECT_ID} SDD --filename
 ```
 

@@ -1,5 +1,6 @@
 ---
 description: Generate NCSC Cloud Security Principles assertions and evidence for a service
+doc-type: SECA
 effort: high
 handoffs:
   - command: /arckit:dpia
@@ -239,7 +240,7 @@ fetch) is exploratory and is not cited — only cite a URL once it has actually 
 with the ArcKit helper (no `--next-num` — SECA is not multi-instance):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {PROJECT_ID} SECA --filename
 ```
 

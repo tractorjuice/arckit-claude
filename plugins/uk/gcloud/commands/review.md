@@ -1,5 +1,6 @@
 ---
 description: Review a G-Cloud service submission for completeness before CCS submission
+doc-type: GCRV
 effort: high
 handoffs:
   - command: /arckit-uk-gcloud:submission-pack
@@ -205,7 +206,7 @@ Check that assertions in `ARC-{PROJECT_ID}-SECA` and `ARC-000-SUPP` have support
 with the ArcKit helper (no `--next-num` — GCRV is not multi-instance):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {PROJECT_ID} GCRV --filename
 ```
 

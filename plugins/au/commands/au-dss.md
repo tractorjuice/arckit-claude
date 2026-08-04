@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a DTA Digital Service Standard compliance assessment for Australian Government digital services against all 13 criteria."
+doc-type: AUDSS
 argument-hint: "<project ID or service, e.g. '001', 'MyGov Portal Redesign'>"
 effort: high
 handoffs:
@@ -70,7 +71,7 @@ The Digital Transformation Agency (DTA) Digital Service Standard sets the mandat
 
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
 
-4. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> AUDSS --filename` for the artefact filename.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUDSS --filename` for the artefact filename.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Australian classification scheme (UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET) — replace the standard UK line in the header.
 

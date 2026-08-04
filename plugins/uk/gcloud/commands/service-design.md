@@ -1,5 +1,6 @@
 ---
 description: Design a new cloud service offering for the G-Cloud marketplace
+doc-type: SVCD
 effort: high
 handoffs:
   - command: /arckit-uk-gcloud:sdd-lot2
@@ -177,7 +178,7 @@ present, defaulting the Classification field to `${user_config.default_classific
 the ArcKit helper:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {PROJECT_ID} SVCD --filename
 ```
 

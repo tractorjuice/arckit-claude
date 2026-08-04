@@ -1,5 +1,6 @@
 ---
 description: Generate the G-Cloud pricing document for a service
+doc-type: PRIC
 effort: high
 handoffs:
   - command: /arckit-uk-gcloud:gcloud-competitors
@@ -211,7 +212,7 @@ fetch) is exploratory and is not cited — only cite a URL once it has actually 
 with the ArcKit helper (no `--next-num` — PRIC is not multi-instance):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh" \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
      {PROJECT_ID} PRIC --filename
 ```
 

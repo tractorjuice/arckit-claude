@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate FIPS 199 system categorization (Low/Moderate/High water-mark) for a US federal civilian information system, mapping information types to NIST SP 800-60 Vol 2 and recording the CIA impact matrix."
+doc-type: FIPS199
 argument-hint: "<project ID or system, e.g. '001', 'Agency Citizen Services Portal'>"
 effort: high
 handoffs:
@@ -60,7 +61,7 @@ The methodology decomposes the system into its constituent **information types**
 
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
 
-4. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> FIPS199 --filename` for the artefact filename. The type code for this command is `FIPS199`.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> FIPS199 --filename` for the artefact filename. The type code for this command is `FIPS199`.
 
 5. Generate the following sections:
 
@@ -72,7 +73,7 @@ The methodology decomposes the system into its constituent **information types**
    - **Agency-Specific Overlays** — note any agency-specific information-type overlays (e.g. CUI categories per 32 CFR Part 2002, HHS-specific health information types, IRS Publication 1075 FTI overlays) that apply.
    - **Rationale and Open Issues** — narrative justification for the water-mark and a register of any provisional or contested classifications requiring SISO/AO review.
 
-6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.sh`.
+6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.mjs`.
 
 7. Emit a short summary to the user — system name, derived water-mark (e.g. `MODERATE / MODERATE / LOW → MODERATE`), count of information types, and any open issues. Do not echo the full artefact.
 

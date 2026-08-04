@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Produce a 3PAO-style Readiness Assessment Report for a FedRAMP authorization — capability statement, gap register, evidence inventory, and recommended ATO path (Agency vs JAB)."
+doc-type: FRRR
 argument-hint: "<project ID or CSO name, e.g. '001', 'Agency Citizen Services Portal'>"
 effort: high
 handoffs:
@@ -61,7 +62,7 @@ This command produces an **internal** RAR-equivalent: a self-assessment in the s
 
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
 
-4. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> FRRR --filename` for the artefact filename. The type code for this command is `FRRR`.
+4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> FRRR --filename` for the artefact filename. The type code for this command is `FRRR`.
 
 5. Generate the following sections:
 
@@ -74,7 +75,7 @@ This command produces an **internal** RAR-equivalent: a self-assessment in the s
    - **3PAO Engagement Readiness** — go / no-go assessment with the top 5 blockers if no-go.
    - **POA&M Pre-Population** — gaps converted to draft POA&M rows in FedRAMP POA&M template format (Weakness, Source, Asset, Severity, Status, Original Detection Date, Scheduled Completion Date).
 
-6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.sh`.
+6. Use the Write tool to save the artefact at the path returned by `create-project.sh` + `generate-document-id.mjs`.
 
 7. Emit a short summary to the user — readiness verdict (Ready / Conditionally Ready / Not Ready), gap counts by severity, recommended authorization path, and the top 3 blockers. Do not echo the full artefact.
 

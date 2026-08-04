@@ -1,5 +1,6 @@
 ---
 description: Discover external data sources (APIs, datasets, open data portals) to fulfil project requirements
+doc-type: DSCT
 argument-hint: "[project-number-or-name] <data need, e.g. '002', 'sovereign real-time traffic data'>"
 tags: [data, api, open-data, datasets, data-sources, discovery, uk-gov, data-integration]
 effort: max
@@ -263,7 +264,7 @@ Return ONLY a concise summary to the user:
 
 - **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/datascout-template.md` (read by writer)
 - **Schemas** — `${CLAUDE_PLUGIN_ROOT}/schemas/datascout-handoff.schema.json` · `${CLAUDE_PLUGIN_ROOT}/schemas/scoring-rubrics/{generic,uk-gov}.yaml`
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/validate-handoff.mjs` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/validate-handoff.mjs` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs`
 - **Subagents dispatched** — `arckit-datascout-reader` (per category × source-type) · `arckit-datascout-writer` (final render)
 - **External tools** — none directly (delegated to reader)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:data-model` (downstream) · `/arckit:dpia` (downstream privacy assessment)

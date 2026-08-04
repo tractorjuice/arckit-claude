@@ -1,5 +1,6 @@
 ---
 description: "[COMMUNITY] Generate a UAE PDPL (Federal Decree-Law 45/2021) compliance assessment including DPIA, lawful-basis register, data-subject-rights procedure, and cross-border transfer log. Anchored on the UAE Data Office statutory framework."
+doc-type: PDPL
 argument-hint: "<project ID or service name>"
 effort: high
 keep-coding-instructions: true
@@ -32,7 +33,7 @@ You are an enterprise architect generating a UAE PDPL Compliance Assessment for 
    - **First**, check `.arckit/templates-custom/uae-pdpl-template.md` (user override)
    - **Then**, `.arckit/templates/uae-pdpl-template.md`
    - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/uae-pdpl-template.md`
-3. Use `scripts/bash/generate-document-id.sh PDPL --filename` for the artefact filename.
+3. Use `node scripts/generate-document-id.mjs <PROJECT_ID> PDPL --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 5. Generate the following sections:
    - **Scope** — what processing is covered, what carve-outs apply. Note free-zone regimes DIFC DPL and ADGM DPR are out of scope of the federal PDPL; healthcare data may also fall under ADHICS.
