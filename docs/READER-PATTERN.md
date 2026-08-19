@@ -4,6 +4,18 @@
 > with a JSON-Schema-validated handoff between reader and orchestrator.
 > First implemented for `arckit-datascout` (issue #442 item 1).
 
+> **This document lives in `docs/`, not `agents/`.** Claude Code registers
+> *every* `.md` under a plugin's `agents/` directory as a dispatchable
+> agent, including one with no frontmatter — which then resolves to an
+> unrestricted tool grant. While this file sat in `agents/` it surfaced as
+> an agent named `READER-PATTERN` with "All tools", and `claude plugin
+> details arckit` billed it as a 2–7K on-invoke skill. Keep design
+> references out of `agents/`; `scripts/check-agent-frontmatter.py`
+> enforces it. It is not in `references/` either: that tree is read at
+> runtime by 55 commands and is therefore copied into every overlay plugin
+> by `sync-shared-assets.py`, whereas this is a maintainer document no
+> command ever reads.
+
 ## Why
 
 Research-heavy agents in ArcKit (`arckit-research`, `arckit-datascout`,
@@ -48,6 +60,7 @@ not stylistic preferences.
 - `tools` allowlist includes `Agent` (to dispatch reader + writer) and `Bash` (strictly for the validator script and project-helper scripts).
 - Scoring is a pure function of `(evidence, rubric)` — no LLM judgment. The rubric is a YAML config file, not a prompt fragment.
 - Validation failure is handled with at most **one** re-dispatch of the reader; second failure logs a gap and continues. No infinite loop.
+- **Dispatch is sequential, and that has to be made explicit.** Claude Code v2.1.232 made non-teammate `Agent` spawns background-by-default in interactive sessions: the call returns `async_launched` with an `agentId` instead of the subagent's report, and the report arrives later as a completion notification. Every tier boundary here is a strict dependency — the orchestrator cannot validate a payload it has not received, and cannot dispatch the writer before scoring. Pass `run_in_background: false` on both dispatches. The parameter is absent from the tool schema in some contexts (and refused for in-process teammates), so an orchestrator must also tolerate its absence: if the spawn is background-only, wait for the completion notification before validating, and never treat an `agentId` as a payload.
 
 ### Writer invariants
 
@@ -65,7 +78,8 @@ arckit-claude/
 │                                         # holds Agent + Bash, dispatches reader and writer.
 ├── agents/
 │   ├── arckit-{name}-reader.md           # Reader subagent (subagent: true)
-│   ├── arckit-{name}-writer.md           # Writer subagent (subagent: true)
+│   └── arckit-{name}-writer.md           # Writer subagent (subagent: true)
+├── docs/
 │   └── READER-PATTERN.md                 # This document
 ├── schemas/
 │   ├── {name}-handoff.schema.json        # JSON Schema 2020-12
@@ -102,14 +116,19 @@ The validator is shared across all three-tier splits. Each agent supplies its ow
 
 ## Adapting this pattern to another agent
 
-When applying this pattern to `arckit-research`, `arckit-grants`, or any
-of the other research agents, follow this sequence:
+**Every research agent has now been split.** `arckit-framework` is the only
+remaining single-tier agent and is deliberately exempt: it is synthesis-only
+over artefacts already in the repository, with no external input to isolate.
+
+Keep this sequence for any new research-heavy command:
+
+0. **Check whether a schema already fits.** `gov-repo-handoff.schema.json` is deliberately shared: it carries a `bucket_type` of `query-variation`, `organisation` or `technology-facet`, and its language/framework/licence enums are kept identical to `gov-reuse-handoff.schema.json`. `/arckit:gov-code-search` and `/arckit:gov-landscape` both use it, which is why it also carries the org-scoped `advisories[]` array only the latter populates. `cloud-research-handoff.schema.json` goes further and is shared by all three cloud commands, whose templates are structurally identical — they also share one **writer**, since a writer holds no network tools and there is nothing to isolate between providers. They do **not** share a reader: each provider's reader allowlists only that provider's MCP server, which is the whole point of the tier.
 
 1. **Define the handoff schema first.** Write `arckit-claude/schemas/{name}-handoff.schema.json` with allowlist enums for every domain-specific field. Drive the schema from the artefact template, not from the existing agent's prompt.
 2. **Pick or write a rubric.** Re-use `generic.yaml` if the agent's scoring criteria don't need overlay-specific tuning; otherwise write `{agent}-{rubric}.yaml`.
-3. **Write the reader.** Tools allowlist: `Read, Glob, Grep, WebSearch, WebFetch, TodoWrite` plus relevant MCP tools. No `Write`, no `Edit`, no `Bash`, no `Agent`. Frontmatter `subagent: true`.
+3. **Write the reader.** Tools allowlist: `Read, Glob, Grep, WebSearch, WebFetch` plus relevant MCP tools. No `Write`, no `Edit`, no `Bash`, no `Agent`. Frontmatter `subagent: true`. The existing readers also list `TodoWrite`; keep it if you copy one, but do not add it to a new reader expecting it to work — Claude Code v2.1.233 removed the todo/task tools on Opus 4.8, Sonnet 5, Fable 5, Opus 5 and every newer model (`CLAUDE_CODE_ENABLE_TODO_TOOLS=1` restores them). The entry is inert on those models, not an error.
 4. **Write the writer.** Tools allowlist: `Read, Write, Edit`. Nothing else. Frontmatter `subagent: true`.
-5. **Rewrite the slash command as the orchestrator.** Move all dispatch + validation + scoring logic into `arckit-claude/commands/{name}.md`. The slash command body runs in the main thread, where `Agent` is available. Process: read project artefacts → dispatch reader per logical bucket → validate via `node validate-handoff.mjs` → score deterministically from the rubric → dispatch writer. Do NOT put this logic in an `arckit-claude/agents/arckit-{name}.md` file; subagents cannot dispatch further subagents in Claude Code plugins.
+5. **Rewrite the slash command as the orchestrator.** Move all dispatch + validation + scoring logic into `arckit-claude/commands/{name}.md`. The slash command body runs in the main thread, where `Agent` is available. Process: read project artefacts → dispatch reader per logical bucket → validate via `node validate-handoff.mjs` → score deterministically from the rubric → dispatch writer. Do NOT put this logic in an `arckit-claude/agents/arckit-{name}.md` file — for the reason given under **"Why the orchestrator lives in the slash command, not an agent file"** above. (That passage is the authority; nested dispatch *is* possible now, it is just not robust to a user's `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` setting.)
 6. **Add fixtures and a test file** under `tests/plugin/fixtures/{name}-handoff/` covering at least 2 valid + 4 reject cases (extra-property, oversized, off-allowlist, injection).
 7. **Wire the test into CI** by adding a step to `.github/workflows/lint-markdown.yml`.
 

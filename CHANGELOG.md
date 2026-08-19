@@ -5,6 +5,142 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.12.0] — 2026-08-19
+
+### Added
+
+- **`scripts/check-action-pins.py`, wired into `lint-markdown.yml`** (#466 item 17). Asserts every `uses:` reference in `.github/workflows/` is a full 40-character commit SHA carrying a `# <version>` comment. Catches three shapes: a mutable tag, a mutable branch, and a SHA with no version comment (which is pinned but unreadable, so nobody can tell when it went stale). Each was verified against a deliberately reintroduced instance.
+
+- **The three cloud-research commands now run as three-tier reader/orchestrator/writer splits** (#466, item 1 remainder). `/arckit:aws-research`, `/arckit:azure-research` and `/arckit:gcp-research` complete the item: **every research agent in ArcKit is now split**, and `arckit-framework` is the only single-tier agent left, deliberately exempt as synthesis-only over artefacts already in the repository.
+
+  **Three readers, one writer, one schema.** Each provider keeps its own reader, allowlisting only that provider's MCP server — an AWS reader must not be able to reach Microsoft Learn, and that is the whole point of the tier. They share `arckit-cloud-research-writer`, because a writer holds no network tools and there is nothing to isolate between providers; sharing it is what keeps the three artefacts structurally comparable, which is what makes them worth putting side by side in `/arckit:evaluate`.
+
+  **The star ratings stop being decorative.** All three templates carry a pillar table:
+
+  ```text
+  | Pillar                 | Rating      | Notes |
+  | Operational Excellence | ⭐⭐⭐⭐⭐ | ...   |
+  | Security               | ⭐⭐⭐⭐⭐ | ...   |
+  ```
+
+  Nothing defined what earned a fifth star, so a reader could not tell a service that scored five because its documentation states customer-managed keys, private networking and audit logging from one that scored five because the model was feeling generous. In practice the tables trended to five across every pillar, which made them useless for the one job they had: comparing two services. `cloud-research-generic.yaml` derives all six pillars from documented capabilities, and the artefact renders the numeric score and the evidence behind each star. The six pillars are AWS Well-Architected's and map cleanly onto the Azure Well-Architected Framework and the Google Cloud Architecture Framework, which is why one rubric serves all three providers.
+
+  **Region availability is a gate, not a score.** A service unavailable in a region the project requires cannot be traded off against a strong security posture, so it never enters the weighted total: it is excluded from the recommendation, rendered in the artefact with the reason, and cited. A row the reader never checked is recorded as a coverage gap rather than as unavailability — the distinction the AWS availability tool makes between `isNotAvailableIn` and `Not Found`, preserved through the schema's status enum.
+
+- **`schemas/cloud-research-handoff.schema.json` and `cloud-research-{generic,uk-gov}.yaml`.** The schema has no pillar rating, star, rank or recommendation field, and `architecture_signals` is a 21-value allowlist of capabilities the provider's *documentation states* — the readers are explicitly forbidden from inferring `multi-az-supported` from a service being a managed database, because that shortcut would score every service identically and destroy the rubric. The UK-Gov variant lifts security 25→30 and sustainability 10→15 (Greening Government ICT makes carbon reporting an obligation, not a preference), and adds two gates for UK region availability and published UK assurance.
+
+- **`tests/plugin/fixtures/cloud-research-handoff/` (3 valid + 6 reject) and `test_validate_cloud_research_handoff.mjs`, wired into `lint-markdown.yml`.** The rejects cover a reader emitting its own `well_architected` ratings and a `recommendation`, a fabricated off-allowlist `best-in-class-security` signal, an off-enum region status, and an unknown provider. One valid fixture is a **preview-lifecycle service with no SLA and no compliance evidence**, which must round-trip cleanly: it is the case the rubric most needs to score low rather than reject.
+
+- **`/arckit:gov-landscape` now runs as a three-tier reader/orchestrator/writer split** (#466, item 1 remainder). This completes the govreposcrape family and leaves only the three cloud-research agents unsplit. The reader holds both govreposcrape MCP tools and `WebFetch`; the orchestrator holds neither; the writer holds the only `Write`.
+
+  **The maturity score stops being an impression.** The single-tier agent assigned five 1-5 dimension scores by eye and averaged them into a Production-Grade / Mature / Developing / Experimental label. Those dimensions had no defined inputs — "Documentation (1=no docs, 5=comprehensive README, guides, API docs, architecture docs)" left the model to decide what *comprehensive* meant, differently on each run — so the resulting label carried an authority the underlying judgement did not support. `gov-landscape-generic.yaml` derives all five from extracted evidence, and the artefact renders the dimension values and the evidence behind them alongside the band. The 1-5 scale and the four band names are preserved so existing GLND artefacts remain comparable.
+
+  The rubric deliberately produces **no overall maturity grade for the domain**. Averaging across repositories of wildly different purpose yields a number that reads as meaningful and is not; the artefact reports the median and the distribution instead.
+
+  One asymmetry is load-bearing and documented in both tiers: a **missing** `has_tests` scores 40, an explicit **`false`** scores 10. The reader is instructed to omit the field rather than guess `false` when it could not see the repository's file listing, and the orchestrator must not coerce missing to false. Getting this wrong silently pushes repositories down a maturity band on no evidence.
+
+- **`gov-repo-handoff.schema.json` gains an `advisories[]` array**, so the shared schema now serves both govreposcrape commands rather than a second one being authored. `advisory_id` is pattern-constrained to real CVE, GHSA or OSV identifier forms: the pattern is the allowlist, so a reader cannot report an advisory it invented a name for. Severity is an enum, counts are bounded integers, and there is no field for remediation advice or exploitability.
+
+  **Absence of data is not absence of vulnerabilities.** Where `vulnerability_exposure` returns nothing for a scope, that scope has *unknown* exposure. The reader records an explicit error, the orchestrator carries `scopes_with_no_data` through to the writer, and the writer must render those scopes under a heading saying exposure is unknown rather than omitting the section — an omitted supply-chain section reads as a clean result.
+
+- **Four more fixtures on the shared `gov-repo-handoff` suite** (now 3 valid + 10 reject), covering an organisation bucket with advisories, a fabricated advisory identifier, an off-enum severity, and a reader emitting its own `maturity_band` and `maturity_score_5`.
+
+- **`/arckit:gov-code-search` now runs as a three-tier reader/orchestrator/writer split** (#466, item 1 remainder). `arckit-gov-code-search-reader` (govreposcrape MCP + `WebFetch`, no `Write`/`Edit`/`Bash`/`Agent`) searches one query variation; the orchestrator is the slash-command body and touches neither the MCP nor the web; `arckit-gov-code-search-writer` (`Read`, `Glob`, `Write`, `Edit`) holds the only `Write` tool. Anyone can open a public repository, and a README is a document an attacker controls end to end, so this boundary matters even though the index itself is trusted.
+
+  **The relevance grade stops being an opinion.** The single-tier agent classified results as "High relevance" or "Medium relevance" by eye, which meant the same query could rank the same repository differently on two runs with nothing recording why. `gov-code-search-generic.yaml` computes it from six weighted criteria, the largest being `query_corroboration` — how many distinct query variations surfaced the repository. That signal only exists because the orchestrator sees every variation at once; no reader can compute it, and the old agent never tried. Every artefact now shows the per-criterion breakdown that produced the band.
+
+- **`schemas/gov-repo-handoff.schema.json`**, deliberately shared rather than per-command. It carries a `bucket_type` of `query-variation`, `organisation` or `technology-facet`, so `/arckit:gov-landscape` can reuse it with `bucket_type: organisation` instead of a third govreposcrape schema being authored. Its `language`, `framework_hints` and `licence` enums are kept identical to `gov-reuse-handoff.schema.json` so the two agree on how a repository is described. It has no relevance, score or rank field, and `match_rank` is defined as the index's own answer that the reader must not reorder.
+
+- **`tests/plugin/fixtures/gov-repo-handoff/` (2 valid + 7 reject) and `test_validate_gov_repo_handoff.mjs`, wired into `lint-markdown.yml`.** The rejects include a reader emitting its own `relevance_band`/`score`, a fabricated off-allowlist standards signal, and an HTML-comment instruction smuggled through `summary_one_liner` — that last one is caught by the `SafeText` pattern excluding angle brackets, not by length.
+
+  One valid fixture is an **empty result set**. A search that finds nothing must round-trip cleanly, because the command's honest-reporting requirement depends on it: a thin or empty index result is evidence about index coverage, not a finding about what government has built, and the artefact now has to say so in the Executive Summary when fewer than ten distinct repositories are found.
+
+- **A repository-level statement of what ArcKit does not do** (#466, items 9 and 21). Every community overlay already carried a "review by qualified DPO / CSO / federal counsel before reliance" banner. The officially-maintained baseline carried none, and it is the baseline that ships `/arckit:dpia`, `/arckit:secure`, `/arckit:mod-secure`, `/arckit:atrs`, `/arckit:jsp-936` and `/arckit:sobc`. A grep for disclaimer language across `README.md` and every `docs/*.md` returned nothing, so the unsupported overlays were better hedged than the supported core.
+
+  `README.md` gains a `## What ArcKit does not do` section, placed immediately before the UK Government Compliance section so a reader meets the limits before the compliance claims. It enumerates them concretely rather than generically: a generated DPIA is not a completed DPIA, because UK GDPR Article 35 places the assessment on the controller and Article 36 requires ICO consultation where high residual risk remains; Secure by Design and JSP 936 packs are input to an assurance decision made by named accountable individuals, not the decision itself; the EU overlay drafts documentation referencing the AI Act, NIS2, DORA and the CRA but performs no conformity assessment and is not a notified-body activity; DCB0129 / DCB0160 need a registered Clinical Safety Officer. It closes with who must review what, and states that it applies to all of ArcKit rather than only the community overlays.
+
+  Two cross-cutting limits are stated because neither is obvious from an artefact that looks finished: citations reflect the moment they were fetched, and generated content can be wrong — schema validation and deterministic scoring reduce the blast radius of a hostile or inaccurate source page without making its facts true.
+
+  `docs/index.html` carries a condensed version of the same statement, because a disclaimer that exists only on GitHub and not on arckit.org is half a fix.
+
+- **`/arckit:research` now runs as a three-tier reader/orchestrator/writer split** (#466, item 1 remainder). It was the largest untrusted-input surface left in the plugin and the last single-tier agent holding `Bash`, `Write` and `WebFetch` in one context: vendor sites, pricing pages, marketplaces and AI-generated comparison pages are written to persuade, and the agent that read them could also execute and write.
+
+  - `arckit-research-reader` (`WebSearch`, `WebFetch`, `Read`, `Glob`, `Grep`, `TodoWrite` — no `Write`, `Edit`, `Bash` or `Agent`) fetches evidence for one research category and returns JSON.
+  - The orchestrator is the slash-command body in the main thread, per `docs/READER-PATTERN.md` step 5. It never calls `WebSearch` or `WebFetch`; it reads reader output only after `validate-handoff.mjs` has validated it.
+  - `arckit-research-writer` (`Read`, `Glob`, `Write`, `Edit` — no network, no `Agent`) holds the only `Write` tool and renders the RSCH artefact, the per-vendor profiles and the tech-notes.
+
+  `agents/arckit-research.md` stays exactly where it is: `converter.py` replaces a command body wholesale with the agent prompt when generating the seven non-Claude targets, which cannot dispatch subagents, so deleting it would break `/arckit:research` on all of them. It keeps its `tools:` allowlist for the same reason the other three monoliths do.
+
+- **`schemas/research-handoff.schema.json`** — the reader's output contract, driven from `templates/research-findings-template.md` rather than from the old agent prompt. It has no `score`, `rank`, `recommendation`, `pros` or `cons` field, so a judgement has nowhere to land even if the reader's prompt is overridden by a fetched page. Every enum is an allowlist: a vendor page cannot introduce a novel certification, licence or procurement vehicle by asserting one. Free-text is confined to `notable_limits`, capped at 200 characters and pattern-restricted to exclude angle brackets, so markup cannot cross the boundary into the artefact.
+
+- **`schemas/scoring-rubrics/research-generic.yaml` and `research-uk-gov.yaml`** — seven weighted criteria (requirements fit, 3-year TCO, compliance, integration, vendor viability, exit risk, procurement readiness) computed as set overlaps and arithmetic bands. The UK-Gov variant reweights procurement readiness 5→15 and compliance 15→20, because a product with no G-Cloud or Digital Outcomes listing is a procurement exercise rather than a purchase, and deliberately drops vendor viability 10→5 so the rubric does not entrench incumbents against the SME-access duty. It adds two fixed rules: a +10 bonus for an already-procured GOV.UK platform, and a score cap of 70 for a public-facing option with no evidence of WCAG 2.1/2.2 AA conformance.
+
+  `analyst_rating` is captured as evidence and rendered in the artefact but is deliberately given no weight in either rubric — a Gartner quadrant position is a fact about a report, not a fact about fit.
+
+- **`tests/plugin/fixtures/research-handoff/` (2 valid + 7 reject) and `test_validate_research_handoff.mjs`, wired into `lint-markdown.yml`.** The reject fixtures cover the four injection shapes this boundary exists to stop: a reader emitting `score`/`recommendation`, a fabricated off-allowlist certification, an oversized persuasive free-text field, and markup plus an instruction string smuggled through `notable_limits`.
+
+- **`scripts/check-agent-frontmatter.py`, wired into `lint-markdown.yml`** (#466). Asserts that every agent declares a non-empty `tools:` allowlist, that `agents/` contains nothing but `arckit-*.md` agent files, that no file carries the `copy_agent_stripped()` writeback signature, and that MCP entries use the `mcp__plugin_<package>_<server>__<tool>` prefix. Each of the four checks was verified against a deliberately reintroduced instance of the defect it guards. Fourteen `check-*.py` guards existed and not one looked at `agents/`, which is why both defects above went unobserved.
+
+### Changed
+
+- **Claude Code minimum-version floor raised to v2.1.234** (#580). Set in `plugins/arckit-claude/hooks/version-check.mjs`; the SessionStart warning gains a bullet per new driver, and the repo dogfood plus the test-repo scaffold move with it.
+
+  The headline driver is a secret-exposure path that lands squarely on ArcKit's own configuration. **v2.1.234 stopped Claude Code's MCP diagnostics printing resolved secrets** — scope-conflict warnings now show the configured `${VAR}` form, and connection-failure details show only the server origin. ArcKit bundles two keyed MCP servers, `google-developer-knowledge` and `datacommons-mcp`, whose `${user_config.*}` API keys sit in request headers; on a session with no keys configured those connections fail *by design* and are documented as expected. ArcKit therefore produces exactly the diagnostics this fixed, routinely, as normal operation.
+
+  Four more fixes below the new floor affect shipped ArcKit behaviour rather than hypotheticals:
+
+  - **v2.1.221** — `WebSearch` returned a 400 at `effort: xhigh`/`max` when thinking was disabled. ArcKit runs 18 commands and three research agents at `effort: max`, so every search from `/arckit:research`, `/arckit:datascout` and `/arckit:grants` failed for anyone running with thinking off. Same shape as the v2.1.172 `WebFetch` wildcard fix that justified an earlier bump: shipped ArcKit configuration, silently inert below a specific release.
+  - **v2.1.222** — PreToolUse auto-allow hooks bypassed tool restrictions inside background agent tasks. This became load-bearing rather than theoretical when v2.1.232 made subagent spawns background by default.
+  - **v2.1.223** — Bash permission-check bypasses where a crafted command could hide part of itself from the approval dialog, and an agent definition's `bypassPermissions` ignoring org policy.
+  - **v2.1.224** — sandbox `denyRead`/`denyWrite` entries written with a trailing slash were silently bypassable, project paths over 200 characters resolved into another project's session directory, and sandbox violations now report which access was denied.
+
+  The floor carries forward every prior driver: v2.1.219 Claude Opus 5, v2.1.200 project-scoped plugin loading from git worktrees and `claude agents --plugin-dir` visibility, the v2.1.198-v2.1.199 background-subagent reliability and hook stderr fixes, v2.1.197 Claude Sonnet 5, and the v2.1.172 wildcard-domain `WebFetch` fix.
+
+  As before, this is a **soft** SessionStart warning, not a hard gate — model choice and update policy stay with the user or org. Per-feature thresholds in the warning body, the `enterprise-scale.md` changelog rows, and historical references are deliberately left at their own versions rather than swept up in the bump.
+
+- **`docs/guides/build.md` "Session limits" corrected, and subagent dispatch made explicit about background-by-default** (#580, PR #817). Claude Code v2.1.224 removed the 200-subagent-per-session spawn cap that #675 had documented, and `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` is now accepted in settings but never read — so setting it looks like it worked and does nothing. The same section also claimed every cap denies; the WebSearch cap never did. Over budget it returns a normal result with `searchCount: 0` telling the model to continue with what it has, so a research-heavy build keeps producing artefacts on thinner evidence instead of halting — for a governance artefact, the worse failure. It now gets its own paragraph rather than a table row that says "denies".
+
+  Separately, v2.1.232 made non-teammate `Agent` spawns background-by-default: the call returns `async_launched` and an `agentId`, not the subagent's report. `/arckit:build`'s wave barrier and every reader → validate → writer handoff are written against synchronous returns, so both now dispatch with `run_in_background: false` — and, because the parameter is stripped from the tool schema in some contexts, both also say what to do when it is unavailable.
+
+- **Every GitHub Action is pinned to a commit SHA** (#466 item 17). All 13 references across the four workflows were on floating tags, and `pypa/gh-action-pypi-publish` was on `release/v1` — a moving **branch**, which advances on every release of that action with no version boundary at all.
+
+  This is not hypothetical hygiene. A tag or branch resolves to whatever it points at *when the workflow runs*, so whoever controls the action repository can repoint one and every downstream workflow picks up the new code silently. ArcKit's workflows run with `contents: write`, and the release workflow additionally holds `id-token: write` for PyPI trusted publishing, so a repointed tag is an arbitrary-code-execution path into a job holding publish credentials.
+
+  Pins were taken at the **current major**, not the version in use: `actions/checkout` v4→v5, `actions/setup-python` v5→v6, `actions/setup-node` v4→v5, `markdownlint-cli2-action` v19→v20, `gh-action-pypi-publish` `release/v1`→v1.14.2 (the same commit that branch pointed at). Pinning at the old majors would have frozen a deprecation GitHub has already announced: the v6.11.0 release log carries `Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5`.
+
+- **`/arckit:research`'s build-vs-buy verdict is now a rule applied to computed numbers, not a judgement.** Buy when the top option scores ≥ 70 and costs less than building; build when nothing clears 50 or everything above it costs more; hybrid when the top option scores well but covers under 70% of required capabilities; and `insufficient evidence` when fewer than two options published pricing at all — that last case previously produced a confident recommendation from a single data point. The build option's cost is an orchestrator estimate and is now explicitly labelled as one, because no reader ever fetched it.
+
+- **`docs/READER-PATTERN.md`** now records which agents have been split and names the five that remain (`aws-research`, `azure-research`, `gcp-research`, `gov-code-search`, `gov-landscape`).
+
+- **Corrected the Agent System section of `CLAUDE.md`** (#466). It claimed 16 agents (there are 19), said the reader/writer subagents are "dispatched only by the corresponding orchestrator agent" (`READER-PATTERN.md` step 5 requires the orchestrator to be the slash command, and the command bodies say so explicitly), and listed `arckit-datascout`, `arckit-gov-reuse` and `arckit-grants` as the agents their commands delegate to, which stopped being true at #446. Those three files are now documented for what they actually are: pre-split monoliths retained solely because the converter replaces a command body wholesale with the agent prompt for non-Claude targets, which cannot dispatch subagents. The MCP tool-naming example in the same section was also wrong — it gave the bare `mcp__<server>__<tool>` form.
+
+### Fixed
+
+- **`READER-PATTERN.md` stopped prescribing a tool that no longer exists** (#580, PR #817). Claude Code v2.1.233 removed `TodoWrite` and the `TaskCreate*` tools on Opus 4.8, Sonnet 5, Fable 5, Opus 5 and newer (`CLAUDE_CODE_ENABLE_TODO_TOOLS=1` restores them). The canonical reader allowlist in the pattern document listed `TodoWrite`, so it would have propagated into every future reader. The 20 existing agent allowlists are deliberately unchanged: an allowlist entry for a tool that does not exist is inert rather than an error, and keeping it preserves the to-do surface for older models, for anyone re-enabling the tools, and for the non-Claude runtimes where `converter.py` maps `TodoWrite` to `todo`.
+
+  `telemetry.mjs` needed no behaviour change but did need a comment: its `tool === 'TaskCreate'` branch is now dead while the adjacent `event === 'TaskCreated'` branch — a different mechanism with a confusingly similar name, still live in v2.1.235 — carries all agent-spawn telemetry. Without the note the obvious cleanup deletes the hook registration.
+
+  Also corrects a miss from #674: that PR fixed the stale "subagents cannot spawn subagents" claim in the pattern document's prose but left the identical claim standing in the step-by-step checklist at the bottom, which is the copy a contributor actually follows.
+
+- **Documented why the PyPI publish job has never worked**, in the job itself (#730). The job was added at v6.8.0 and has failed on every release since — v6.8.0, v6.9.0, v6.10.0 and v6.11.0 — leaving `arckit-cli` on PyPI at 6.4.1, which is the exact problem #730 added it to solve. It is not a regression and not a defect in the workflow: the failure is
+
+  ```text
+  Trusted publishing exchange failure:
+  * `invalid-publisher`: valid token, but no corresponding publisher
+  ```
+
+  meaning the OIDC token mints correctly and PyPI has no Trusted Publisher matching the claims. The one-time PyPI-side setup the job's own comment documents (Owner `tractorjuice`, Repository `arc-kit`, Workflow `release.yml`, Environment `pypi`) was never completed. **Nothing in this repository can fix it**, so the job now carries a dated status block recording the failure and the exact claims that must match, rather than leaving each release to rediscover it.
+
+- **Restored the `tools:` allowlist, `effort:` and `maxTurns:` on `arckit-datascout`, `arckit-grants` and `arckit-gov-reuse`** (#466). PR #445 migrated all ten research agents off a `disallowedTools` denylist onto an explicit `tools:` allowlist, so that tools added by future Claude Code versions cannot auto-grant to an existing agent. PR #446 — the three-tier reader/writer split — silently reverted it on exactly the three agents it touched, and the regression survived three months and seven minor releases. Both changes are recorded as shipped in #466's own "already done" list.
+
+  The cause was mechanical, not a hand-edit. `converter.py::copy_agent_stripped()` pops the five `CLAUDE_ONLY_AGENT_FIELDS` and rebuilds the block with `yaml.dump()`; run with its destination pointing at the source tree it strips `effort`/`maxTurns`/`tools` from the plugin itself and leaves an alphabetised `description, model, name` block with the description reflowed from a `|` literal into a single-quoted folded scalar. All three damaged files carried that signature exactly; the other sixteen agents kept their authored field order. Until now those three ran with every tool in the harness, at session effort, with no turn cap.
+
+  `arckit-gov-reuse`'s MCP entry is restored in the `mcp__plugin_arckit_govreposcrape__search_uk_gov_code` form rather than the bare `mcp__govreposcrape__…` it originally shipped with, which matches nothing in plugin context.
+
+- **`READER-PATTERN.md` is no longer registered as a dispatchable agent** (#466). Claude Code registers *every* `.md` under a plugin's `agents/` directory, including one with no frontmatter, which then resolves to an unrestricted tool grant. A design reference therefore surfaced as an agent named `READER-PATTERN` with "All tools", and `claude plugin details arckit` billed it as a 2–7K on-invoke skill — it was listed as one in README's own footprint table, captured from that command. Moved to `plugins/arckit-claude/docs/READER-PATTERN.md`, next to `DEPENDENCY-MATRIX.md`.
+
+  Not to `references/`: that tree is read at runtime by 55 commands and is consequently copied into all 15 overlay plugins by `sync-shared-assets.py`, while no command has ever read this document.
+
 ## [6.11.0] — 2026-08-19
 
 ### Documentation
