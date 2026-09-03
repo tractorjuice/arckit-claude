@@ -1,0 +1,33 @@
+{
+  "mode": "live",
+  "plugin": "/Users/mark.craddock/arc-kit/plugins/arckit-claude",
+  "cases": [
+    {
+      "name": "search-is-read-only",
+      "score": 0.6666666666666666,
+      "cost_usd": 1.0096827499999999,
+      "num_turns": 2,
+      "graders": [
+        {
+          "name": "finds-the-requirement",
+          "type": "regex",
+          "passed": false,
+          "details": "pattern not found in last message; match=contains"
+        },
+        {
+          "name": "never-edits",
+          "type": "tool_used",
+          "passed": true,
+          "details": "Edit called 0 time(s); min=0 max=0"
+        },
+        {
+          "name": "never-writes",
+          "type": "tool_used",
+          "passed": true,
+          "details": "Write called 0 time(s); min=0 max=0"
+        }
+      ]
+    }
+  ],
+  "total_cost_usd": 1.0096827499999999
+}

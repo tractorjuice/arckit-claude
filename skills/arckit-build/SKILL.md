@@ -1,6 +1,6 @@
 ---
 name: arckit-build
-description: "This skill should be used when the user wants to bulk-build ArcKit artefacts in parallel rather than running individual /arckit:* commands one at a time. Invoke manually with /arckit:arckit-build when the task sounds like 'kick off a build', 'build everything', 'generate all artefacts', 'run all the commands', 'rebuild this project from scratch', 'resume the build', 'pick up where we left off', 'refresh the artefacts', 'run the recipe', 'build the whole project end-to-end', or 'parallel build', or mentions `--plan`, `--resume`, `--target`, `--refresh`, `--recipe`, or `.arckit/state.json`. The skill orchestrates parallel /arckit:* generation using subagent isolation: reads project state, computes the artefact dependency DAG, dispatches one subagent per target per wave (each subagent invokes a /arckit:* skill in its own context), validates outputs, commits the wave, and persists progress to .arckit/state.json for resumability."
+description: "Bulk-builds a project's ArcKit artefacts in parallel from a YAML recipe: computes the artefact dependency DAG, dispatches one subagent per target per wave, validates each output, commits the wave and persists progress to .arckit/state.json so a build can resume. Manual only: run /arckit:arckit-build with --plan, --resume, --target, --refresh or --recipe. Not needed for a single artefact; run that /arckit:* command directly."
 disable-model-invocation: true
 ---
 
@@ -105,6 +105,8 @@ The orchestrator substitutes these placeholders in `args` and `output.project` b
 ### Dep resolution
 
 `deps: ["ADR-*"]` matches all targets whose ID begins with `ADR-`. Exact IDs take precedence; globs expand at wave-computation time against the resolved target list (after optional-target filtering).
+
+An exact-ID dep naming an **optional target** orders the build only while that target is enabled: disabled optional-target IDs are pruned from every remaining target's `deps` at resolution time (step 4 below). A recipe may therefore declare the true ordering — `OAGOV` deps `[OAAL, OASEC]` in `oaa-full` — without `--exclude OASEC` leaving `OAGOV` waiting forever on a target that will never run. A dep naming a *non-optional* target that doesn't exist in the recipe is still an error.
 
 ## Input-hash change detection
 
@@ -241,6 +243,8 @@ Steps:
 
    Document the choice you made in your final report so the orchestrator can record it.
    Never block waiting for an answer.
+   This is the non-interactive rule of `${CLAUDE_PLUGIN_ROOT}/references/interview-pattern.md`;
+   the table above wins where it names a header.
 
 2. Capture the actual file path the skill wrote to. Inside the Write tool call,
    the ArcKit `validate-arc-filename.mjs` PreToolUse hook normalizes the path
@@ -372,7 +376,7 @@ State written by older versions (`state_format_version: "0.3"`) is read-compatib
 1. **Parse arguments** from skill input (project, --plan, --resume, --recipe, --enable, --exclude, etc.). If project not specified, ask user.
 2. **Detect project**: resolve `<project>` arg → `projects/{P}-{slug}/`. Confirm directory exists.
 3. **Load recipe**: resolve `--recipe NAME` (default `uk-saas`) against the precedence list. Read the YAML with the Read tool. Validate top-level shape (`recipe`, `schema_version`, `targets`, `defaults.version`). Halt with a clear error if the recipe file is missing or malformed.
-4. **Resolve enabled targets**: drop `optional_targets` whose `default: false` unless `--enable ID` was passed; drop `optional_targets` named in `--exclude ID`. Apply `{P}/{NAME}/{V}/{TOPIC}` substitution to every `args` and `output.project` field.
+4. **Resolve enabled targets**: drop `optional_targets` whose `default: false` unless `--enable ID` was passed; drop `optional_targets` named in `--exclude ID`. Then prune every dropped optional-target ID from the remaining targets' `deps` lists — a dep on an optional target orders the build only when that target is enabled; without pruning, the dependent target's deps could never all be `done` and it would sit in `pending` forever. Apply `{P}/{NAME}/{V}/{TOPIC}` substitution to every `args` and `output.project` field.
 5. **Load state.json** at `projects/{P}-{NAME}/.arckit/state.json`. If absent, scan project dir for existing `ARC-{P}-*-v*.md` files and infer initial state.
 6. **Subagent capability smoke-test** (first wave only, skip on `--resume`): before dispatching the real wave, spawn one throwaway `general-purpose` Agent with this prompt:
 

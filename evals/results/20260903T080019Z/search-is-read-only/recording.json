@@ -1,0 +1,32 @@
+{
+  "tool_uses": [
+    {
+      "name": "Grep",
+      "input": {
+        "pattern": "PostgreSQL",
+        "path": "/private/var/folders/xn/kqswbnwx7gx5_h8jjjkj915h0000gn/T/arckit-eval-search-is-read-only-kojoytat/projects/001-benefits-portal/ARC-001-REQ-v1.0.md",
+        "output_mode": "content",
+        "-i": true,
+        "-n": true
+      }
+    }
+  ],
+  "last_message": "## Search Results for \"PostgreSQL\" (project 001)\n\nFound 1 match across 1 project:\n\n| Score | Document | Type | Project | Title |\n|-------|----------|------|---------|-------|\n| 3 | ARC-001-REQ-v1.0 | REQ | 001-benefits-portal | Requirements: Housing Benefits Portal |\n\n### Top Result Preview\n**ARC-001-REQ-v1.0** (projects/001-benefits-portal/ARC-001-REQ-v1.0.md, line 48)\n> | DR-001 | Claim records MUST be held in the council's **PostgreSQL** platform service with point-in-time recovery. | Must |\n\nThe match is in the Data Requirements table, not the title or control fields. The document is at version 1.0, status DRAFT, owned by the Head of Digital.\n\nOnly one artifact exists in project 001, so there are no further previews to show. No ADR yet records the PostgreSQL choice that DR-001 assumes. If that decision needs justifying, `/arckit:adr` for project 001 would be the next step.",
+  "cost_usd": 1.5944055000000001,
+  "num_turns": 2,
+  "subtype": "success",
+  "exit_code": 0,
+  "stderr": "",
+  "duration_s": 22.5,
+  "created_files": [
+    ".arckit/memory/.cc-version",
+    ".arckit/memory/.telemetry.jsonl"
+  ],
+  "case": "search-is-read-only",
+  "prompt": "/arckit:search PostgreSQL --project=001",
+  "tags": [
+    "read-only",
+    "search"
+  ],
+  "recorded_at": "2026-09-03T08:00:41.758715+00:00"
+}

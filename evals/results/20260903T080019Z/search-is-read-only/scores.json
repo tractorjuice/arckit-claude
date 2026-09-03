@@ -1,0 +1,23 @@
+{
+  "graders": [
+    {
+      "name": "finds-the-requirement",
+      "type": "regex",
+      "passed": true,
+      "details": "pattern found in trace; match=contains"
+    },
+    {
+      "name": "never-edits",
+      "type": "tool_used",
+      "passed": true,
+      "details": "Edit called 0 time(s); min=0 max=0"
+    },
+    {
+      "name": "never-writes",
+      "type": "tool_used",
+      "passed": true,
+      "details": "Write called 0 time(s); min=0 max=0"
+    }
+  ],
+  "score": 1.0
+}

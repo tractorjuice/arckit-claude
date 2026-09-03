@@ -1,0 +1,16 @@
+{"ts":"2026-09-03T08:01:09.992Z","kind":"hook_duration","tool":"Glob","duration_ms":8,"effort":"high"}
+{"ts":"2026-09-03T08:01:10.792Z","kind":"hook_duration","tool":"Read","duration_ms":2,"effort":"high"}
+{"ts":"2026-09-03T08:01:11.406Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:12.413Z","kind":"hook_duration","tool":"Glob","duration_ms":18,"effort":"high"}
+{"ts":"2026-09-03T08:01:12.565Z","kind":"hook_duration","tool":"Read","duration_ms":356,"effort":"high"}
+{"ts":"2026-09-03T08:01:18.278Z","kind":"hook_duration","tool":"Read","duration_ms":0,"effort":"high"}
+{"ts":"2026-09-03T08:01:20.538Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:22.041Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:25.835Z","kind":"hook_duration","tool":"Bash","duration_ms":46,"effort":"high"}
+{"ts":"2026-09-03T08:01:26.946Z","kind":"hook_duration","tool":"Grep","duration_ms":18,"effort":"high"}
+{"ts":"2026-09-03T08:01:33.517Z","kind":"hook_duration","tool":"Bash","duration_ms":14,"effort":"high"}
+{"ts":"2026-09-03T08:01:34.592Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:38.565Z","kind":"hook_duration","tool":"Bash","duration_ms":13,"effort":"high"}
+{"ts":"2026-09-03T08:07:05.205Z","kind":"hook_duration","tool":"Write","duration_ms":2,"effort":"high"}
+{"ts":"2026-09-03T08:07:14.629Z","kind":"hook_duration","tool":"Bash","duration_ms":29,"effort":"high"}
+{"ts":"2026-09-03T08:07:17.742Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}

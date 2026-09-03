@@ -1,0 +1,35 @@
+{
+  "graders": [
+    {
+      "name": "artefact-at-governed-path",
+      "type": "file_exists",
+      "passed": true,
+      "details": "created files matching 'projects/001-benefits-portal/ARC-001-STKE-v1.0.md': ['projects/001-benefits-portal/ARC-001-STKE-v1.0.md']"
+    },
+    {
+      "name": "cites-the-external-doc",
+      "type": "regex",
+      "passed": true,
+      "details": "pattern found in projects/001-benefits-portal/ARC-001-STKE-v1.0.md; match=contains"
+    },
+    {
+      "name": "status-is-draft",
+      "type": "regex",
+      "passed": true,
+      "details": "pattern found in projects/001-benefits-portal/ARC-001-STKE-v1.0.md; match=contains"
+    },
+    {
+      "name": "uses-the-external-doc",
+      "type": "regex",
+      "passed": true,
+      "details": "pattern found in projects/001-benefits-portal/ARC-001-STKE-v1.0.md; match=contains"
+    },
+    {
+      "name": "wrote-artefact",
+      "type": "tool_used",
+      "passed": true,
+      "details": "Write called 1 time(s); min=1 max=4"
+    }
+  ],
+  "score": 1.0
+}

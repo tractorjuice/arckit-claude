@@ -1,0 +1,15 @@
+{"ts":"2026-09-03T08:01:07.103Z","kind":"hook_duration","tool":"Read","duration_ms":2,"effort":"high"}
+{"ts":"2026-09-03T08:01:07.818Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:08.435Z","kind":"hook_duration","tool":"Glob","duration_ms":20,"effort":"high"}
+{"ts":"2026-09-03T08:01:08.435Z","kind":"hook_duration","tool":"Glob","duration_ms":25,"effort":"high"}
+{"ts":"2026-09-03T08:01:24.736Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:25.556Z","kind":"hook_duration","tool":"Read","duration_ms":2,"effort":"high"}
+{"ts":"2026-09-03T08:01:25.556Z","kind":"hook_duration","tool":"Read","duration_ms":2,"effort":"high"}
+{"ts":"2026-09-03T08:01:26.652Z","kind":"hook_duration","tool":"Read","duration_ms":386,"effort":"high"}
+{"ts":"2026-09-03T08:01:28.479Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:29.311Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:01:39.605Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
+{"ts":"2026-09-03T08:09:15.240Z","kind":"hook_duration","tool":"Write","duration_ms":3,"effort":"high"}
+{"ts":"2026-09-03T08:09:26.690Z","kind":"hook_duration","tool":"Grep","duration_ms":10,"effort":"high"}
+{"ts":"2026-09-03T08:09:28.396Z","kind":"hook_duration","tool":"Grep","duration_ms":19,"effort":"high"}
+{"ts":"2026-09-03T08:09:32.652Z","kind":"hook_duration","tool":"Read","duration_ms":1,"effort":"high"}
