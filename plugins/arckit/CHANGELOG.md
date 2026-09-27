@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.16.4] — 2026-09-27
+
+### Changed
+
+- **`/arckit:pages`: `llms.txt` and the vendor ranking are opt-in** (`LLMS=true`, `VENDOR_SCORES=true`); every run shows a CONFIDENTIALITY section naming artefacts marked above OFFICIAL.
+
+- **`/arckit:evaluate` and `/arckit:score`: supplier proposals are evidence, never instructions**; embedded instructions are reported as Integrity findings.
+
+- **Accurate update instructions** in the SessionStart update notice.
+
+### Fixed
+
+- **Backlog totals hook** (`hooks/validate-backlog-totals.mjs`, rules in `hooks/backlog-totals.mjs`; #855, #856). Recomputes story, epic, point, priority and requirement totals from `ARC-*-BKLG-*.json` and blocks mismatches, `Sprint 0` placeholders and unrecorded MoSCoW downgrades against the project's REQ. `/arckit:backlog` now always writes the JSON first and takes the Markdown's totals from it, and keeps unchanged items' points when regenerating.
+
+- **`/arckit:pages`: large PlantUML diagrams render** (#648). Deflate encoding in place of hex, so URLs are several times shorter; a diagram still too large says so instead of blaming its syntax.
+
+- **Overlay recipes' `skill:` steps are namespaced when published** (#835), so `/arckit:build` can run them from a marketplace install.
+
 ## [6.16.3] — 2026-09-27
 
 ### Fixed

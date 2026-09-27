@@ -264,7 +264,7 @@ targets:
   # conventioned filenames (SAFETY.md, SAFETY-CASE.md, HAZARD-LOG.md) inside
   # clinical-safety/ — these do not carry an ARC- prefix or doc-type code.
   - id: UK_NHS_DCB0129
-    skill: arckit:uk-nhs-dcb0129
+    skill: arckit-uk-nhs:uk-nhs-dcb0129
     args: "{P}"
     output: { project: "{P}-{NAME}", type: NHSCSCR, subfolder: "clinical-safety" }
     deps: [REQ, DATA, STKE, RISK]
@@ -272,19 +272,19 @@ targets:
   # NHSDCSC is an informational state-key only; the command writes Marcus-
   # conventioned filenames inside clinical-safety/deployment/.
   - id: UK_NHS_DCB0160
-    skill: arckit:uk-nhs-dcb0160
+    skill: arckit-uk-nhs:uk-nhs-dcb0160
     args: "{P}"
     output: { project: "{P}-{NAME}", type: NHSDCSC, subfolder: "clinical-safety/deployment" }
     deps: [UK_NHS_DCB0129, REQ, RISK]
 
   - id: UK_NHS_DTAC
-    skill: arckit:uk-nhs-dtac
+    skill: arckit-uk-nhs:uk-nhs-dtac
     args: "{P}"
     output: { project: "{P}-{NAME}", type: NHSDTAC }
     deps: [UK_NHS_DCB0129, DPIA, TCOP, SBD, HLD, DATA, ATRS, AIP]
 
   - id: UK_MDR_CLASSIFICATION
-    skill: arckit:uk-mdr-classification
+    skill: arckit-uk-nhs:uk-mdr-classification
     args: "{P}"
     output: { project: "{P}-{NAME}", type: NHSMDR }
     deps: [REQ, UK_NHS_DCB0129, RISK]

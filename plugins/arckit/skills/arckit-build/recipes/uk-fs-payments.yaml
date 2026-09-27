@@ -97,25 +97,25 @@ targets:
 
   # --- UK FS Payments overlay targets -------------------------------------
   - id: UK_FS_SCA_RTS
-    skill: arckit:uk-fs-sca-rts
+    skill: arckit-uk-finance:uk-fs-sca-rts
     args: "{P}"
     output: { project: "{P}-{NAME}", type: FSSCA }
     deps: [REQ, ADR, DPIA]
 
   - id: UK_FS_SAFEGUARDING
-    skill: arckit:uk-fs-safeguarding
+    skill: arckit-uk-finance:uk-fs-safeguarding
     args: "{P}"
     output: { project: "{P}-{NAME}", type: FSSAFE }
     deps: [REQ, RISK]
 
   - id: UK_FS_CONSUMER_DUTY
-    skill: arckit:uk-fs-consumer-duty
+    skill: arckit-uk-finance:uk-fs-consumer-duty
     args: "{P}"
     output: { project: "{P}-{NAME}", type: FSCD }
     deps: [STKE, REQ]
 
   - id: UK_FS_CTP_DEPENDENCY
-    skill: arckit:uk-fs-ctp-dependency
+    skill: arckit-uk-finance:uk-fs-ctp-dependency
     args: "{P}"
     output: { project: "{P}-{NAME}", type: FSCTP }
     deps: [ADR, RISK]
