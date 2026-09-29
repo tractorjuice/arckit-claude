@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.16.6] — 2026-09-29
+
+### Added
+
+- **Eval: `/arckit:secure` on Claude Sonnet 5.5.** Sonnet 5.5 is the first Sonnet with cybersecurity safeguards, and ArcKit's security commands discuss threats and attacks. The new `secure-on-sonnet-5-5` case runs `/arckit:secure` pinned to Sonnet 5.5 with a STRIDE threat model in the request, and checks that the assessment is written with its threat model, that every response came from Sonnet 5.5, and that none was re-run on Sonnet 5 or refused. Run it with `scripts/eval-headless.py --case "secure-on-sonnet-5-5"`; it needs Claude Code v2.1.284.
+
+- **Evals can compare effort levels.** `scripts/eval-headless.py --effort <level>` runs a case against a temporary copy of the plugin with the invoked command's `effort:` changed, because a command's own setting wins over the session's. Each recording now notes the model, the requested effort, the thinking and output tokens, and the run time. A run that outlives its time limit is recorded and scored as a failure instead of stopping every case after it, and `--timeout` raises the limit. Two new cases, `requirements-new-project` and `sobc-traces-to-stakeholders` (tagged `effort-comparison`), exercise two of the commands that run at `effort: max`; `/arckit:sobc` gets a stakeholder analysis fixture so its prerequisite is met.
+
+### Changed
+
+- **`/arckit:requirements` and `/arckit:sobc` run at `effort: high`, not `max`.** An eval comparison on Claude Opus 5.5 and Sonnet 5.5 found that `max` did not make either document better enough to justify it. On Opus 5.5, the default model, `max` wrote the same number of requirements at 3.4 times the cost and 4 times the wait (48 minutes against 12). On both models it made the business case about 30% longer, at 2.5 to 3 times the cost, without a richer financial appraisal. Requirements now finish in about a quarter of the time, and business cases in about a third. The results are in `plugins/arckit-claude/evals/README.md`.
+
+- **Model guidance for Sonnet 5.5.** The enterprise-scale guide no longer calls Sonnet 5 the normal default: Claude Code starts on Opus 5.5, and `sonnet` means Sonnet 5.5 from v2.1.284. It now covers the `deniedModels` and `availableModelsMatch: "exact"` managed settings, which hold a new model back until you have evaluated it, and explains what happens when a security command trips a model's cybersecurity safeguard: Claude Code re-runs it on an older model and the session stays there. The Secure by Design guides say the same where the user reads them, and CLAUDE.md notes that Sonnet 5.5 has no fast mode.
+
+### Fixed
+
+- **Every business-case option carries its own risks.** `/arckit:sobc` requires risks for each option, but even with the template's examples fixed, one run in three still left them off the option it recommended rejecting. The command now says the rule covers Do Nothing and rejected options too, and the quality checklist the command re-reads before writing gains the same check. Re-tested: 5 of 5 runs on Opus 5.5 and Sonnet 5.5 give every option its own risks, against 0 of 6 on the old template and 2 of 3 with the template fix alone.
+
+- **Command templates now show every field their command requires.** Thirteen templates contradicted their own commands: the command required a field on every item, and the template's examples left it out on some, so the model left it out too. Fixed: requirements (acceptance criteria and rationale on every requirement, and MoSCoW priorities throughout, so non-functional and integration requirements are now covered by the backlog's priority check), Secure by Design and MOD Secure by Design (status, evidence, and an owner, due date and priority on every action), operationalize (prerequisites, detection, verification and rollback in every runbook), DPIA (mitigation and residual risk for every risk, and the command's Remote/Possible/Probable and Minimal/Significant/Severe scales, with ICO prior consultation triggered at a HIGH residual risk as UK GDPR Article 36 requires), ADR, SOBC and platform design (the missing fields on their third example option or portrait), maturity model (scope, rationale, alignment and transition criteria per dimension), and the Wardley gameplay, climate and doctrine templates (the missing columns). Re-tested live: every requirement complete in every run at `effort: high` on Opus 5.5 and Sonnet 5.5, where before every run at every effort left acceptance criteria off dozens of them; and one run each on Sonnet 5.5 of secure, MOD secure, operationalize, ADR, maturity model, platform design, DPIA and the Wardley doctrine, gameplay and climate assessments, each checked by a new `template-fields` eval case, all complete. The business case improved but is not solved: every option carried its own risks in 2 of 3 runs, against 0 of 6 on the old template.
+
+- **Every architecture principle gets its Rationale and Implications.** `/arckit:principles` requires both for every principle, but the template's own examples left Rationale out of six principles and Implications out of eight, and at normal effort the model copied the gaps: every generated set of principles had five to eight principles without them. The template now gives every example principle both, and the `principles-governed-artefact` eval checks each principle. Re-tested on Opus 5.5 and Sonnet 5.5: every principle complete in every run.
+
+- **The end-of-turn nudge no longer reports projects that do not exist.** It counted any committed file named `ARC-NNN-*`, wherever it lived, so an eval fixture or sample artefact could prompt you to run `/arckit:requirements` for a phantom "project 001". It now counts only artefacts under the repository's own `projects/` directory.
+
 ## [6.16.5] — 2026-09-28
 
 ### Changed

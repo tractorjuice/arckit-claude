@@ -2,7 +2,7 @@
 description: Create Strategic Outline Business Case (SOBC) using UK Government Green Book 5-case model
 doc-type: SOBC
 argument-hint: "<project ID or initiative, e.g. '001', 'cloud migration programme'>"
-effort: max
+effort: high
 keep-coding-instructions: true
 handoffs:
   - command: requirements
@@ -145,10 +145,10 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
      - Option 1: Minimal viable solution
      - Option 2: Balanced approach (often recommended)
      - Option 3: Comprehensive solution
-     - For EACH option:
+     - For EACH option, including Do Nothing and any option you recommend rejecting:
        - High-level costs (rough order of magnitude)
        - Benefits delivered (% of stakeholder goals met)
-       - Risks
+       - Risks (its own **Risks** list: a rejected option still has risks, and they are part of why it is rejected)
        - Pros/cons
    - **Benefits Mapping**:
      - Link EACH benefit to specific stakeholder goal from ARC-{PROJECT_ID}-STKE-v*.md
