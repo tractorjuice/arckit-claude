@@ -2,6 +2,11 @@
 description: Bundle all documents for a G-Cloud 15 service into a submission pack for GCA
 doc-type: none
 effort: medium
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -30,6 +35,8 @@ $ARGUMENTS
 ```
 
 ## Instructions
+
+**Questions** — whenever this command asks with **AskUserQuestion**, follow the one-message interview in `${CLAUDE_PLUGIN_ROOT}/references/interview-pattern.md`: ask only what the project context cannot settle, in one call, with one option marked (Recommended); with no question tool available, take that default, say so in the summary, and never block.
 
 ### 1. Resolve the existing service project
 

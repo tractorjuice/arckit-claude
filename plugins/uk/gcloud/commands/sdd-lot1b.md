@@ -9,6 +9,13 @@ handoffs:
     description: Generate the security evidence for this service
   - command: /arckit-uk-gcloud:lot-questions
     description: Answer the Lot 1a/1b lot questions, including bidding for Lot 1b and ISO 27018 (once per bid)
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -74,7 +81,7 @@ Use the **Read tool** on each of these; where several versions exist, read the h
   supplier-wide fact (certifications, locations, clearances, contacts) as `[PENDING]`.
 - **Service design** (this project): `{path}/ARC-{PROJECT_ID}-SVCD-v*.md`. If it is missing, **stop**:
   tell the user to run `/arckit-uk-gcloud:service-design` first, because it records the lot this command checks.
-- **Existing SDD** (present on a re-run): `{path}/ARC-{PROJECT_ID}-SDD-v*.md`.
+- **Existing SDD** (present on a re-run): `{path}/ARC-{PROJECT_ID}-SDD-v*.md`. Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 - **Lot questions** (if written): `projects/000-global/supplier/ARC-000-LOTQ-v*.md`. Only **Part 1
   (Lots 1a and 1b)** matters here: the SDD must agree with it.
 
@@ -216,11 +223,10 @@ Step 4).
 with the ArcKit helper (no `--next-num` — SDD is not multi-instance):
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} SDD --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} SDD --filename
 ```
 
-This returns `ARC-{NNN}-SDD-v1.0.md` (using the zero-padded project number from Step 1). Use the
+This returns `ARC-{NNN}-SDD-v{VERSION}.md` (using the zero-padded project number from Step 1). Use the
 returned filename for a new SDD. On a re-run, use the incremented version instead (e.g.
 `ARC-{NNN}-SDD-v1.1.md`) and add the Revision History row.
 

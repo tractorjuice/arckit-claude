@@ -7,6 +7,13 @@ handoffs:
     description: Adjust pricing based on the competitive benchmark
   - command: /arckit-uk-gcloud:review
     description: Fold competitive positioning into the submission review
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -33,6 +40,8 @@ $ARGUMENTS
 ```
 
 ## Instructions
+
+**Questions** — whenever this command asks with **AskUserQuestion**, follow the one-message interview in `${CLAUDE_PLUGIN_ROOT}/references/interview-pattern.md`: ask only what the project context cannot settle, in one call, with one option marked (Recommended); with no question tool available, take that default, say so in the summary, and never block.
 
 ### 1. Resolve the existing service project
 
@@ -259,11 +268,10 @@ rather than minting new ones.
 with the ArcKit helper (no `--next-num` — GCMP is not multi-instance):
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} GCMP --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} GCMP --filename
 ```
 
-This returns `ARC-{NNN}-GCMP-v1.0.md` (using the zero-padded project number from Step 1). Use the
+This returns `ARC-{NNN}-GCMP-v{VERSION}.md` (using the zero-padded project number from Step 1). Use the
 returned filename and take the version from it. If the service already has a competitor benchmark,
 increment the version instead and add a Revision History row.
 
@@ -288,7 +296,7 @@ Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and
 
 Use the **Write tool** to save the completed benchmark to:
 
-`{path}/{filename}` — e.g. `projects/004-secure-case-mgmt/ARC-004-GCMP-v1.0.md`
+`{path}/{filename}` — e.g. `projects/004-secure-case-mgmt/ARC-004-GCMP-v1.0.md` Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 The template carries the standard ArcKit footer; populate it rather than appending a second one:
 

@@ -9,6 +9,13 @@ handoffs:
     description: Generate NCSC Cloud Security Principles assertions
   - command: /arckit-uk-gcloud:lot-questions
     description: Answer the Lot 3 mandatory award criteria and certifications (once per Lot 3 bid)
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -39,6 +46,8 @@ $ARGUMENTS
 ```
 
 ## Instructions
+
+**Questions** — whenever this command asks with **AskUserQuestion**, follow the one-message interview in `${CLAUDE_PLUGIN_ROOT}/references/interview-pattern.md`: ask only what the project context cannot settle, in one call, with one option marked (Recommended); with no question tool available, take that default, say so in the summary, and never block.
 
 ### 1. Resolve the existing service project
 
@@ -75,7 +84,7 @@ Use the **Read tool** on each of these that exists (when several versions exist,
   missing, tell the user to run `/arckit-uk-gcloud:supplier-profile` first and stop.
 - Service design (this project): `{path}/ARC-{PROJECT_ID}-SVCD-v*.md`. If it is missing, tell the
   user to run `/arckit-uk-gcloud:service-design` first and stop.
-- The existing SDD, on a re-run: `{path}/ARC-{PROJECT_ID}-SDD-v*.md`.
+- The existing SDD, on a re-run: `{path}/ARC-{PROJECT_ID}-SDD-v*.md`. Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 - The supplier's one Lot 3 rate card: `projects/000-global/supplier/ARC-000-RATE-v*.md`, owned by
   `/arckit-uk-gcloud:pricing`. Read it to check this service's role levels are on it; never copy its rates.
 - The lot questions: `projects/000-global/supplier/ARC-000-LOTQ-v*.md`. When it has a **Part 3
@@ -232,11 +241,10 @@ appropriate inline citation marker (see Step 4).
 with the ArcKit helper (no `--next-num` — SDD is not multi-instance):
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} SDD --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} SDD --filename
 ```
 
-This returns `ARC-{NNN}-SDD-v1.0.md` (using the zero-padded project number from Step 1). Use the
+This returns `ARC-{NNN}-SDD-v{VERSION}.md` (using the zero-padded project number from Step 1). Use the
 returned filename for a new document and take the version (`1.0`) from it. On a re-run, increment the
 existing SDD's version instead (e.g. `ARC-{NNN}-SDD-v1.1.md`) and add a Revision History row.
 

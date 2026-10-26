@@ -9,6 +9,13 @@ handoffs:
     description: Produce a Data Protection Impact Assessment using ArcKit core
   - command: /arckit-uk-gcloud:review
     description: Validate security evidence as part of submission completeness
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -74,7 +81,7 @@ Use the **Read tool** on the highest version of each of these that exists:
   answers; this document must agree with it
 - Lot questions (supplier-wide): `projects/000-global/supplier/ARC-000-LOTQ-v*.md` — certifications
   and award-criteria answers given at lot level, in the Part for this service's lot group
-- Existing security document (on a re-run): `{path}/ARC-{PROJECT_ID}-SECA-v*.md`
+- Existing security document (on a re-run): `{path}/ARC-{PROJECT_ID}-SECA-v*.md` Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 If the supplier profile or service design is missing, warn the user that running
 `/arckit-uk-gcloud:supplier-profile` and `/arckit-uk-gcloud:service-design` first produces a consistent document, then
@@ -286,11 +293,10 @@ doesn't give stays `[PENDING]` — it has no default.
 with the ArcKit helper (no `--next-num` — SECA is not multi-instance):
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} SECA --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} SECA --filename
 ```
 
-This returns `ARC-{NNN}-SECA-v1.0.md` (using the zero-padded project number from Step 1). Use the
+This returns `ARC-{NNN}-SECA-v{VERSION}.md` (using the zero-padded project number from Step 1). Use the
 returned filename and take the version from it. If the service already has a security document,
 increment the version instead and add a Revision History row.
 

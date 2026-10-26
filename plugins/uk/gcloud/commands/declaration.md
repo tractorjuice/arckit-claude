@@ -5,6 +5,13 @@ effort: high
 handoffs:
   - command: /arckit-uk-gcloud:review
     description: Validate the declaration as part of submission completeness
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -324,8 +331,10 @@ answer that would fail under "Items Requiring Attention". Fill the **G-Cloud Det
 
 Generate the document ID with the ArcKit helper (DECL is single-instance):
 
+Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
+
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" 000 DECL --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" 000 DECL {VERSION} --filename
 ```
 
 This returns `ARC-000-DECL-v1.0.md`. If a declaration already exists, increment its version instead

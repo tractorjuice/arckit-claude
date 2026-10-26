@@ -20,6 +20,16 @@ handoffs:
     condition: "Lot 3 (Cloud Support) selected"
   - command: /arckit-uk-gcloud:pricing
     description: Produce the G-Cloud 15 pricing document for this service
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh *)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -311,11 +321,10 @@ for UK Gov context if unavailable).
 the ArcKit helper:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} SVCD --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} SVCD --filename
 ```
 
-This returns `ARC-{NNN}-SVCD-v1.0.md` (using the zero-padded `project_number` from Step 3). Use the
+This returns `ARC-{NNN}-SVCD-v{VERSION}.md` (using the zero-padded `project_number` from Step 3). Use the
 returned filename and take the version from it. If the service already has a service design,
 increment the version instead and add a Revision History row.
 
@@ -359,7 +368,7 @@ Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and
 
 Use the **Write tool** to save the completed document to:
 
-`{project_dir}/{filename}` — e.g. `projects/004-secure-case-mgmt/ARC-004-SVCD-v1.0.md`
+`{project_dir}/{filename}` — e.g. `projects/004-secure-case-mgmt/ARC-004-SVCD-v1.0.md` Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 (The Write tool creates parent directories automatically.) Do **not** echo the full document into
 your response — print only the summary below.

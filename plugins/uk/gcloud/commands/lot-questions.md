@@ -7,6 +7,13 @@ handoffs:
     description: Prepare the supplier declaration once the lot questions are answered
   - command: /arckit-uk-gcloud:service-design
     description: Design a service in a lot group that has no service yet
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -364,8 +371,10 @@ Requiring Attention".
 Generate the document ID with the ArcKit helper (LOTQ is single-instance — one document for all the
 supplier's lot groups):
 
+Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
+
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" 000 LOTQ --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" 000 LOTQ {VERSION} --filename
 ```
 
 This returns `ARC-000-LOTQ-v1.0.md`. If a LOTQ document already exists, increment its version

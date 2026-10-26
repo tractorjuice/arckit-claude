@@ -5,6 +5,13 @@ effort: high
 handoffs:
   - command: /arckit-uk-gcloud:submission-pack
     description: Bundle the service documents once the review is clean
+allowed-tools:
+  - Read(/${CLAUDE_PLUGIN_ROOT}/**)
+  - Bash(bash ${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh" *)
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bash/list-projects.sh *)
+  - Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs *)
+  - Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" *)
 ---
 
 > ⚠️ **Community-contributed command** — part of the `arckit-uk-gcloud` overlay, not the
@@ -524,11 +531,10 @@ These are the same reasons listed in section 8 of the review template:
 with the ArcKit helper (no `--next-num` — GCRV is not multi-instance):
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" \
-     {PROJECT_ID} GCRV --filename
+node "${CLAUDE_PLUGIN_ROOT}/scripts/generate-document-id.mjs" {PROJECT_ID} GCRV --filename
 ```
 
-This returns `ARC-{NNN}-GCRV-v1.0.md` (using the zero-padded project number from Step 1). Use the
+This returns `ARC-{NNN}-GCRV-v{VERSION}.md` (using the zero-padded project number from Step 1). Use the
 returned filename and take the version from it. If the service already has a review report,
 increment the version instead and add a Revision History row.
 
@@ -541,7 +547,7 @@ increment the version instead and add a Revision History row.
 - **Fallback**, `${CLAUDE_PLUGIN_ROOT}/templates/review-template.md`
 - **Then read** `${CLAUDE_PLUGIN_ROOT}/templates/_partials/RENDERING.md` and resolve the `<!-- DOC-CONTROL-HEADER -->` marker in the template before writing. Do not hand-write the Document Control table: the partial `RENDERING.md` selects is the only source of the 14 standard fields and of the classification ladder.
 
-Set the Document ID to `ARC-{PROJECT_ID}-GCRV-v{VERSION}` and the Document Type to
+Set the Document ID to `ARC-{PROJECT_ID}-GCRV-v{VERSION}` and the Document Type to Work out `{VERSION}` first with `${CLAUDE_PLUGIN_ROOT}/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 `G-Cloud Submission Review`, and the `**G-Cloud Lot**` line to the lot from the service design.
 Populate the template from Step 3:
 
