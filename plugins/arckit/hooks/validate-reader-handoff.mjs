@@ -45,6 +45,7 @@
  * Exit code 0 always.
  */
 
+import { isMainModule } from './hook-utils.mjs';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -65,7 +66,11 @@ export const READER_SCHEMAS = {
   'arckit-azure-research-reader': 'cloud-research-handoff.schema.json',
   'arckit-gcp-research-reader': 'cloud-research-handoff.schema.json',
   'arckit-tenders-reader': 'tenders-handoff.schema.json',
+  'arckit-evaluate-reader': 'evaluate-handoff.schema.json',
 };
+
+// A bidder can't be scored on part of a bid, so a failed read isn't a gap to note and move past.
+const ONE_BIDDER = new Set(['arckit-evaluate-reader']);
 
 /** "arckit:arckit-research-reader" or "arckit-research-reader" -> "arckit-research-reader". */
 export function readerName(agentType) {
@@ -199,7 +204,7 @@ export function decide(data) {
         hookSpecificOutput: {
           hookEventName: 'PostToolUse',
           updatedToolOutput: replaceText(response, WITHHELD),
-          additionalContext: `ArcKit handoff check (${reader}): the reader did not complete (status ${clip(JSON.stringify(status))}), so its reply was withheld unvalidated. Re-dispatch the reader once; if that also fails, log the gap.`,
+          additionalContext: `ArcKit handoff check (${reader}): the reader did not complete (status ${clip(JSON.stringify(status))}), so its reply was withheld unvalidated. Re-dispatch the reader once; if that also fails, ${ONE_BIDDER.has(reader) ? 'leave this vendor unscored and state why' : 'log the gap'}.`,
         },
       };
     }
@@ -229,6 +234,34 @@ export function decide(data) {
   return null;
 }
 
+/**
+ * What to do when the check itself breaks. A reader's reply is untrusted until
+ * checked, so it's held back rather than passed on unvalidated. Anything that
+ * isn't one of our readers is left alone.
+ */
+export function onCheckFailed(data) {
+  if (data.hook_event_name === 'PreToolUse' && data.tool_name === 'SubagentHandback') {
+    if (!readerName(data.agent_type)) return null;
+    return {
+      hookSpecificOutput: {
+        hookEventName: 'PreToolUse',
+        permissionDecision: 'deny',
+        permissionDecisionReason: 'ArcKit handoff check: the check itself failed, so your report can\'t be accepted. Stop and report that it failed.',
+      },
+    };
+  }
+  if (data.hook_event_name === 'PostToolUse' && readerName((data.tool_input || {}).subagent_type)) {
+    return {
+      hookSpecificOutput: {
+        hookEventName: 'PostToolUse',
+        updatedToolOutput: replaceText(data.tool_response, WITHHELD),
+        additionalContext: 'ArcKit handoff check: the check itself failed, so the reply was withheld unvalidated.',
+      },
+    };
+  }
+  return null;
+}
+
 function main() {
   let raw = '';
   try {
@@ -242,16 +275,18 @@ function main() {
   } catch {
     process.exit(0);
   }
+  if (!data || typeof data !== 'object') process.exit(0);
   let out = null;
   try {
     out = decide(data);
   } catch (e) {
     process.stderr.write(`[ArcKit] handoff check failed: ${e.message}\n`);
+    out = onCheckFailed(data);
   }
   if (out) process.stdout.write(JSON.stringify(out));
   process.exit(0);
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMainModule(import.meta.url)) {
   main();
 }

@@ -18,7 +18,7 @@ Each plugin lives in its own folder under `plugins/`, with its own README:
 - [`plugins/arckit`](plugins/arckit): the core plugin
 - Jurisdiction overlays: [`uae`](plugins/uae), [`fr`](plugins/fr), [`nl`](plugins/nl), [`ca`](plugins/ca), [`eu`](plugins/eu), [`at`](plugins/at), [`au`](plugins/au), [`au/energy`](plugins/au/energy), [`us`](plugins/us)
 - Sector overlays: [`uk/finance`](plugins/uk/finance), [`uk/nhs`](plugins/uk/nhs), [`uk/legacy`](plugins/uk/legacy), [`uk/gcloud`](plugins/uk/gcloud) (proprietary, see its LICENSE)
-- Method overlays: [`togaf/adm`](plugins/togaf/adm), [`oaa`](plugins/oaa), [`agent/architecture`](plugins/agent/architecture)
+- Method overlays: [`togaf/adm`](plugins/togaf/adm), [`oaa`](plugins/oaa), [`arc42`](plugins/arc42), [`agent/architecture`](plugins/agent/architecture)
 - Tooling: [`repo`](plugins/repo), [`fde`](plugins/fde)
 
 ## Data and privacy
